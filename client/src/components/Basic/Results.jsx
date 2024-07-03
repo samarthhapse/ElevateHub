@@ -3,6 +3,7 @@ import { FaStar, FaShareAlt, FaDollarSign } from 'react-icons/fa';
 const Results = () => {
   return (
     <main className="text-center p-6 pb-1 bg-[#fdf9f6] min-h-screen mt-8 ">
+      <br></br>
       <h1 className="text-xl font-semibold text-gray-600 mb-11">
         WEBINAR SOFTWARE THAT GETS RESULTS BY REPURPOSING AND SCALING VIDEO CONTENT
       </h1>

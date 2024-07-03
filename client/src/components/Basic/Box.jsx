@@ -33,6 +33,7 @@ const Box = () => {
         >
           <div className="w-full sm:w-1/2 p-8 bg-red-500 text-white rounded-lg">
             <h2 className="text-3xl font-bold">Host Engaging Webinars</h2>
+            <br></br>
             <div className="mt-4">
               <div className="flex flex-col space-y-4">
                 <div className="bg-white text-black p-4 rounded-lg shadow-md">
@@ -82,6 +83,7 @@ const Box = () => {
           </div>
           <div className="w-full sm:w-1/2 p-8 bg-blue-500 text-white rounded-lg">
             <h2 className="text-3xl font-bold">Instantly Create Content</h2>
+            <br></br>
             <div className="mt-4">
               <div className="bg-white text-black p-4 rounded-lg shadow-md">
                 <p className="font-bold">Create Clips powered by AI</p>

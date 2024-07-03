@@ -10,6 +10,7 @@ const Footer = () => {
           <button className="mt-4 bg-black text-white py-2 px-4 rounded hover:bg-gray-700 transition duration-300">
             Talk with an expert
           </button>
+          
         </div>
         <div className="md:w-1/3 mb-8 md:mb-0">
           <h2 className="text-lg font-semibold text-white">PRODUCT</h2>
@@ -39,20 +40,20 @@ const Footer = () => {
         <div className="flex flex-wrap mt-4 justify-center items-center">
           <div className="w-1/2 md:w-1/4 p-2">
             <div className="bg-white text-black p-4 rounded shadow hover:shadow-lg transition duration-300">
-              <p>Best Support</p>
-              <p>Mid-Market</p>
+              <p align="center">Best Support</p>
+              <p align="center">Mid-Market</p>
             </div>
           </div>
           <div className="w-1/2 md:w-1/4 p-2">
             <div className="bg-white text-black p-4 rounded shadow hover:shadow-lg transition duration-300">
-              <p>Leader</p>
-              <p>Mid-Market</p>
+              <p align="center">Leader</p>
+              <p align="center">Mid-Market</p>
             </div>
           </div>
           <div className="w-1/2 md:w-1/4 p-2">
             <div className="bg-white text-black p-4 rounded shadow hover:shadow-lg transition duration-300">
-              <p>Easiest To Do Business With</p>
-              <p>Mid-Market</p>
+              <p align="center">Easiest To Do Business With</p>
+              <p align="center">Mid-Market</p>
             </div>
           </div>
         </div>
