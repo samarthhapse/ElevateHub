@@ -9,7 +9,6 @@ import { sendMessage } from "../api/basicapi";
 const MessageContainer = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
- 
 
   const { id } = useParams();
   const model = JSON.parse(localStorage.getItem("userData")).type;
@@ -21,21 +20,23 @@ const MessageContainer = () => {
       return;
     }
     getMessages({ token, receiverId: id }).then((res) => {
-      
-      // setMessages(res.data);
+      console.log(res.data);
+      setMessages(res.data);
     });
   }, [token, id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (message.length < 1){
-      return
+    if (message.length < 1) {
+      return;
     }
     const response = await sendMessage({
+      receiverId: id,
       token,
-      message
+      message,
+      senderModel: model,
     });
-    setMessage("")
+    setMessage("");
     console.log(response);
   };
 
@@ -48,7 +49,7 @@ const MessageContainer = () => {
         </div>
         <div className="w-full h-4/5 border px-4 py-2">
           {messages.map((msg) => (
-            <Message key={msg} message={msg} />
+            <Message key={msg._id} message={msg.message} />
           ))}
         </div>
         <form className="" onSubmit={handleSubmit}>
