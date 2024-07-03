@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, json, useNavigate } from "react-router-dom";
 import { expertLogin } from "../../api/expertapi";
 import { useDispatch } from "react-redux";
-import { setAuthToken, setExpertData } from "../../../redux/expertSlice";
+import { setExpertAuthToken, setExpertData } from "../../../redux/expertSlice";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
@@ -31,8 +31,14 @@ const ExpertLogin = () => {
       const response = await expertLogin(inputs);
       if (response.status === 200) {
         alert(response.data.message);
-        dispatch(setAuthToken(response.data.token));
+       
+        dispatch(setExpertAuthToken(response.data.token));
         dispatch(setExpertData(response.data.userData));
+        localStorage.setItem("userToken", response.data.token);
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({ type: "expert", ...response.data.userData })
+        );
         setInputs({
           email: "",
           password: "",

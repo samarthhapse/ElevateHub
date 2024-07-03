@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { studentLogin } from "../../api/studentapi";
 import { useDispatch } from "react-redux";
-import { setAuthToken, setStudentData } from "../../../redux/studentSlice";
+import { setStudentAuthToken, setStudentData } from "../../../redux/studentSlice";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
@@ -31,8 +31,13 @@ const StudentLogin = () => {
       const response = await studentLogin(inputs);
       if (response.status === 200) {
         alert(response.data.message);
-        dispatch(setAuthToken(response.data.token));
+        dispatch(setStudentAuthToken(response.data.token));
         dispatch(setStudentData(response.data));
+        localStorage.setItem("userToken", response.data.token);
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({ type: "student", ...response.data.userData })
+        );
         setInputs({
           email: "",
           password: "",

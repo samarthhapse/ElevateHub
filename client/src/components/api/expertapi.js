@@ -15,7 +15,7 @@ export const getExpertDetails = (id) => axios.get(`${API_URL}/${id}`);
 export const getAllExperts = () => axios.get(`${API_URL}/`);
 
 export const updateExpertDetails = (token, data) =>
-  axios.post(
+  axios.patch(
     `${API_URL}/update`,
     { updatedData: data },
     {

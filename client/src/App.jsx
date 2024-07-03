@@ -20,9 +20,34 @@ import OtpVerifyExpert from "./components/auth/expert/OtpVerify-expert";
 import PageNotFound from "./components/Basic/PageNotFound";
 import Navbar from "./components/Basic/Navbar";
 import ExpertProfile from "./components/profile/ExpertProfile";
+import MessageContainer from "./components/chat/MessageContainer";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setExpertAuthToken, setExpertData } from "./redux/expertSlice";
+import { setStudentAuthToken, setStudentData } from "./redux/studentSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    const token = localStorage.getItem("userToken");
+    const userData = JSON.parse(localStorage.getItem("userData"));
+  
+    if (!token || !userData) {
+      return;
+    }
+
+    if (userData.type === "expert") {
+      dispatch(setExpertAuthToken(token));
+      dispatch(setExpertData(userData));
+    } else if (userData.type === "student") {
+      dispatch(setStudentAuthToken(token));
+      dispatch(setStudentData(userData));
+    }
+   
+  }, [dispatch]);
   // const { theme } = useContext(ThemeContext);
+ 
   return (
     <ThemeProvider>
       <BrowserRouter>
@@ -42,7 +67,8 @@ function App() {
           <Route path="/otpverifyexpert" element={<OtpVerifyExpert />} />
           <Route path="/events" element={<HomePage />} />
           <Route path="/pricing" element={<HomePage />} />
-          <Route path="/expert/:id" element={<ExpertProfile/>} />
+          <Route path="/expert/:id" element={<ExpertProfile />} />
+          <Route path="/message/:id" element={<MessageContainer />} />
 
           <Route path="/*" element={<PageNotFound />} />
         </Routes>

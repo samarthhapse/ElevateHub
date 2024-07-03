@@ -25,6 +25,6 @@ router.post("/login", login);
 router.post("/resetpassword", changePassword);
 router.get("/:id", expertDetails);
 router.get("/", getAllExperts);
-router.post("/update", isAuthenticated, updateExpertDetails);
+router.patch("/update", isAuthenticated, updateExpertDetails);
 
 export default router;

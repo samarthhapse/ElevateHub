@@ -38,10 +38,11 @@ const ExpertHome = () => {
       setLoading(false);
       return;
     }
-    const userData = {...inputs, expertise} 
+    const userData = { ...inputs, expertise };
     const response = await updateExpertDetails(token, userData).catch((err) => {
       console.log(err.response);
       setError(err.response.data.message);
+      setLoading(false);
       return;
     });
     const updatedData = response.data.user;

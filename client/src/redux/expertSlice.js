@@ -7,7 +7,7 @@ const expertSlice=createSlice({
         expertData: null
     },
     reducers:{
-        setAuthToken:(state,action)=>{
+        setExpertAuthToken:(state,action)=>{
             state.authToken = `Bearer ${action.payload}`;
         },
         setExpertData: (state,action)=>{
@@ -16,5 +16,5 @@ const expertSlice=createSlice({
     }
 })
 
-export const {setAuthToken, setExpertData}=expertSlice.actions;
+export const {setExpertAuthToken, setExpertData}=expertSlice.actions;
 export default expertSlice.reducer;
