@@ -7,7 +7,6 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 export const register = async (req, res) => {
   try {
-    console.log("request", req.files);
     let user, checkStudent;
     const {
       name,
@@ -137,7 +136,7 @@ export const login = async (req, res) => {
     };
 
     const token = jwt.sign(tokenData, process.env.JWT_SECRET_KEY, {
-      expiresIn: "1d",
+      // expiresIn: "1d",
     });
     const userData = await Expert.findById(user._id).select("-password");
 
@@ -233,7 +232,7 @@ export const getAllExperts = async (req, res) => {
 };
 
 export const updateExpertDetails = async (req, res) => {
-  const userId = req.id;
+  const userId = req.userId;
   if (!userId) {
     return res
       .status(401)

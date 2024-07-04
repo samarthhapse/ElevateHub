@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { expertRegister } from "../../api/expertapi";
 import { useDispatch } from "react-redux";
-import { setAuthToken } from "../../../redux/studentSlice";
+import { setExpertAuthToken } from "../../../redux/expertSlice";
 
 const OtpVerify = () => {
   const dispatch = useDispatch();
@@ -57,7 +57,7 @@ const OtpVerify = () => {
       const response = await expertRegister(data);
       console.log(response);
       alert(response.data.message);
-      dispatch(setAuthToken(response.data.token));
+      dispatch(setExpertAuthToken(response.data.token));
       setOtp(new Array(6).fill(""));
       navigate("/expertlogin");
     } catch (error) {

@@ -1,12 +1,10 @@
 import express from 'express'
-import messagecontroller from '../controllers/message-controller.js'
+import { getMessages, sendMessage } from '../controllers/message-controller.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 
 const router = express.Router();
 
-// Route to get all messages for a specific chat
-router.get('/:chatId',messagecontroller.allMessages);
-
-// Route to send a new message
-router.post('/',messagecontroller.sendMessage);
+router.get("/:id", isAuthenticated, getMessages);
+router.post("/send/:id", isAuthenticated, sendMessage);
 
 export default router;

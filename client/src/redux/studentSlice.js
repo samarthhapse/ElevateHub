@@ -7,7 +7,7 @@ const studentSlice=createSlice({
         studentdata: null
     },
     reducers:{
-        setAuthToken:(state,action)=>{
+        setStudentAuthToken:(state,action)=>{
             state.authToken = `Bearer ${action.payload}`;
         },
         setStudentData: (state,action)=>{
@@ -16,5 +16,5 @@ const studentSlice=createSlice({
     }
 })
 
-export const {setAuthToken, setStudentData}=studentSlice.actions;
+export const {setStudentAuthToken, setStudentData}=studentSlice.actions;
 export default studentSlice.reducer;
