@@ -4,9 +4,10 @@ import cors from "cors";
 import connectDB from "./config/connection.js";
 import studentRoute from "./routes/studentRoute.js";
 import expertRoute from "./routes/expertRoute.js";
-import otpRoute from './routes/otpRoute.js';
+import otpRoute from "./routes/otpRoute.js";
+import userRoute from "./routes/userRoute.js"
 
-import messageRoutes from './routes/messageRoute.js';
+import messageRoutes from "./routes/messageRoute.js";
 import { Server } from "socket.io";
 
 dotenv.config({});
@@ -18,15 +19,14 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/v1/student/", studentRoute);
-app.use("/api/v1/expert/", expertRoute);
-app.use("/api/v1/otp/", otpRoute);
+app.use("/api/v1/student", studentRoute);
+app.use("/api/v1/expert", expertRoute);
+app.use("/api/v1/otp", otpRoute);
 app.use("/api/v1/message", messageRoutes);
-
+app.use("/api/v1/user", userRoute);
 
 const server = app.listen(PORT, () => {
   connectDB().then(() => {
     console.log(`Server Listening on : http://localhost:${PORT}`);
   });
 });
-

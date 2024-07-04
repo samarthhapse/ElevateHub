@@ -28,11 +28,11 @@ import { setStudentAuthToken, setStudentData } from "./redux/studentSlice";
 
 function App() {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     const token = localStorage.getItem("userToken");
     const userData = JSON.parse(localStorage.getItem("userData"));
-  
+
     if (!token || !userData) {
       return;
     }
@@ -44,10 +44,9 @@ function App() {
       dispatch(setStudentAuthToken(token));
       dispatch(setStudentData(userData));
     }
-   
   }, [dispatch]);
   // const { theme } = useContext(ThemeContext);
- 
+
   return (
     <ThemeProvider>
       <BrowserRouter>
@@ -69,6 +68,7 @@ function App() {
           <Route path="/pricing" element={<HomePage />} />
           <Route path="/expert/:id" element={<ExpertProfile />} />
           <Route path="/message/:id" element={<MessageContainer />} />
+          <Route path="/not-found" element={<PageNotFound />} />
 
           <Route path="/*" element={<PageNotFound />} />
         </Routes>

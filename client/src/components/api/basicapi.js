@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const MESSAGE_URL = "http://localhost:5000/api/v1/message";
+const USER_URL = "http://localhost:5000/api/v1/user"
 
 const getMessages = ({ token, receiverId }) =>
   axios.get(`${MESSAGE_URL}/${receiverId}`, {
@@ -21,4 +22,6 @@ const sendMessage = ({ token, message, senderModel, receiverId }) =>
       },
     }
   );
-export { getMessages, sendMessage };
+
+const getUserInfo = ({id}) => axios.get(`${USER_URL}/${id}`)
+export { getMessages, sendMessage , getUserInfo};
