@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
 import image1 from "../../../assets/img1.png";
 import { GoogleLogin } from "react-google-login";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 const ExpertSignup = () => {
   const { isDarkMode } = useTheme();
@@ -24,6 +25,9 @@ const ExpertSignup = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     setError(null);
@@ -96,6 +100,14 @@ const ExpertSignup = () => {
 
   const googleFailure = (error) => {
     console.log("Google Sign Up was unsuccessful. Try again later.", error);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   return (
@@ -190,24 +202,34 @@ const ExpertSignup = () => {
               required
               className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
             />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={handleChange}
-              value={inputs.password}
-              required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
-            <input
-              type="password"
-              placeholder="Confirm password"
-              name="confirmPassword"
-              onChange={handleChange}
-              value={inputs.confirmPassword}
-              required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
+            <div className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg flex items-center">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                name="password"
+                onChange={handleChange}
+                value={inputs.password}
+                required
+                className="flex-1 outline-none bg-transparent"
+              />
+              <button type="button" onClick={togglePasswordVisibility} className="ml-2">
+                {showPassword ? <IoEyeOffOutline size={24} /> : <IoEyeOutline size={24} />}
+              </button>
+            </div>
+            <div className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg flex items-center">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm password"
+                name="confirmPassword"
+                onChange={handleChange}
+                value={inputs.confirmPassword}
+                required
+                className="flex-1 outline-none bg-transparent"
+              />
+              <button type="button" onClick={toggleConfirmPasswordVisibility} className="ml-2">
+                {showConfirmPassword ? <IoEyeOffOutline size={24} /> : <IoEyeOutline size={24} />}
+              </button>
+            </div>
             <div className="mb-4 mr-32">
               <div className="mr-40">
                 <h3 className="text-md font-md mb-2">Expertise:</h3>
