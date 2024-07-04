@@ -34,13 +34,13 @@ export const getExpertDetails = (id) => axios.get(`${API_URL}/${id}`);
 export const getAllExperts = () => axios.get(`${API_URL}/`);
 
 export const updateExpertDetails = (token, data) =>
-    axios.post(
-        `${API_URL}/update`,
-        { updatedData: data },
-        {
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                Authorization: token,
-            },
-        }
-    );
+axios.post(
+    `${API_URL}/update`,
+    { updatedData: data },
+    {
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: token,
+        },
+    }
+);

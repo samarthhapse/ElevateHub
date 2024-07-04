@@ -18,13 +18,13 @@ const HomePage = () => {
     <div className= {`max-w-full overflow-x-hidden ${isDarkMode ? 'bg-newgreen text-white':''}`}>
       <div className= {`flex flex-col justify-between items-center ${isDarkMode ? 'bg-newgreen text-white':'bg-white'} min-h-screen max-w-100vw md:w-full sm:flex-row`} >
   <div className=" text-left max-w-3xl flex flex-col justify-center p-8 mt-6 sm:mr-11 sm:ml-3">
-    <h2 className="uppercase text-sm font-semibold text-gray-700 mb-2">
+    <h2 className="uppercase text-sm font-semibold text-gray-450 mb-2">
             10x Webinar Value & Repurpose Content with AI
           </h2>
           <h1 className={`text-5xl font-bold ${isDarkMode ? 'bg-newgreen text-white':' text-gray-800'} mb-6 sm:w-96 `}>
             Webinar software for the modern marketer
           </h1>
-          <p className="text-lg text-gray-700 mb-8">
+          <p className="text-lg text-gray-450 mb-8">
             Seamlessly Design, Host, and Repurpose Company Town
           </p>
           <div className="flex space-x-4">
@@ -63,6 +63,7 @@ const HomePage = () => {
                 <h2 className="text-2xl font-bold text-white md:text-3xl">
                   Your One-Stop Destination for {" "}
                 </h2>
+                <br></br>
 
                 <div className="hidden text-white md:block mt-4">
                   <ul className="text-lg">
@@ -73,11 +74,12 @@ const HomePage = () => {
                     <li>Global Connection</li>
                   </ul>
                 </div>
+                <br></br>
 
                 <div className="mt-4 md:mt-8 text-center">
                   <Link
                     to="/Landing"
-                    className="inline-block rounded border border-white bg-white px-12 py-3 text-md font-bold text-blue-900 transition hover:bg-transparent hover:text-lg hover:px-8 hover:text-white hover:rounded-xl"
+                    className="inline-block rounded border border-white bg-white px-9 py-3 text-md font-bold text-blue-900 transition hover:bg-transparent hover:text-lg hover:px-8 hover:text-white hover:rounded-xl"
                   >
                     Get Started Today
                   </Link>

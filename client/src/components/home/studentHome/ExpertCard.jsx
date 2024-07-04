@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 const ExpertCard = ({ expert }) => {
   return (
     <Link to={`/expert/${expert._id}`} className="w-64 rounded overflow-hidden shadow-lg bg-gray-800 text-white p-4 m-4">
@@ -11,6 +12,7 @@ const ExpertCard = ({ expert }) => {
         <p className="text-gray-300 text-base">Expertise: {expert.expertise}</p>
         <p className="text-gray-300 text-base">Field: {expert.field}</p>
       </div>
+      
     </Link>
   );
 };

@@ -38,10 +38,11 @@ const ExpertHome = () => {
       setLoading(false);
       return;
     }
-    const userData = {...inputs, expertise} 
+    const userData = { ...inputs, expertise };
     const response = await updateExpertDetails(token, userData).catch((err) => {
       console.log(err.response);
       setError(err.response.data.message);
+      setLoading(false);
       return;
     });
     const updatedData = response.data.user;
@@ -51,7 +52,7 @@ const ExpertHome = () => {
     setLoading(false);
   };
   return (
-    <div className="w-4/5 m-auto border rounded-md ">
+    <div className="w-4/5 m-auto border rounded-md mt-12">
       <div className="flex flex-wrap p-10 gap-6 justify-evenly">
         {Object.keys(inputs).map((input) => (
           <Input

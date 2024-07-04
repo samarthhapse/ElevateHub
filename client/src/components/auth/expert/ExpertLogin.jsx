@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, json, useNavigate } from "react-router-dom";
+
 import { expertLogin } from "../../api/expertapi";
 import { useDispatch } from "react-redux";
-import { setAuthToken, setExpertData } from "../../../redux/expertSlice";
+import { setExpertAuthToken, setExpertData } from "../../../redux/expertSlice";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
 import { account, client } from "../../utils/appwrite";
@@ -19,35 +20,39 @@ const ExpertLogin = () => {
         password: "",
     });
 
-    const handleChange = (e) => {
+const handleChange = (e) => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await expertLogin(inputs);
+      if (response.status === 200) {
+        alert(response.data.message);
+        dispatch(setAuthToken(response.data.token));
+        dispatch(setExpertData(response.data.userData));
+        localStorage.setItem("userToken", response.data.token);
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({ type: "expert", ...response.data.userData })
+        );
         setInputs({
-            ...inputs,
-            [e.target.name]: e.target.value,
+          email: "",
+          password: "",
         });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await expertLogin(inputs);
-            if (response.status === 200) {
-                alert(response.data.message);
-                dispatch(setAuthToken(response.data.token));
-                dispatch(setExpertData(response.data.userData));
-                setInputs({
-                    email: "",
-                    password: "",
-                });
-                navigate("/experthome");
-            } else {
-                alert("error while logging");
-            }
-        } catch (error) {
-            console.log(error);
-            alert(error.response.data.message);
-        }
-    };
-
+        navigate("/experthome");
+      } else {
+        alert("Error while logging in");
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+      alert(error.response.data.message);
+    }
+  };
     const handleGoogleLogin = async () => {
         try {
             setIsGoogleLogin(true);

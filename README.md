@@ -120,9 +120,13 @@
 - Handle payment confirmation and feedback submission logic
 - Update user profiles and records based on payment completion and feedback
 
+# Project Title
+
+A brief description of what this project does and who it's for
+
 ## Installation
 
-### To get started with Sarthi, follow these steps:
+#### Creating a Fork of the Repo and Clonning 
 
 1 . Clone the repository :
 
@@ -135,24 +139,83 @@ git clone https://github.com/samarthhapse/sarthi
 cd sarthi 
 ```
 
-3 . Start frontend :
+3 . Add git remote upstream throught the terminal navigating to the profile file: 
+```
+git remote add upstream https://github.com/samarthhapse/sarthi 
+```
+
+
+#### To get started with Sarthi frontend, follow these steps:
+
+1 . Start frontend :
 ```
 cd client
 ```
 
-3 . Install dependencies :
+2 . Install dependencies :
 ```
 npm install
 ```
 
-4 . Run client on localhost :
+3 . Add A Environment Variable File `.env` having the Variables : 
+```
+CLIENT_ID=<THE-GOOGLE-AUTH-CLIENT-ID>
+CLIENT_SECRET_KEY=<THE-GOOGLE-AUTH-CLIENT-ID>
+CLIENT_REDIRECT_URL=<THE-URL-OF-YOUR-BACKEND>
+
+VITE_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1
+VITE_APPWRITE_PROJECT=<YOUR-APPWRITE-PROJECT-ID>
+
+PORT=<PORT-AT-WHICH-YOUR-BACKEND-IS-RUNNING>
+```
+
+3 . Run client on localhost :
 
 ```
 npm run dev
 ```
 
-This will launch the application in your default web browser.
->You can access it at http://localhost:5173
+#### To get started with Sarthi Backend, follow these steps:
+
+1 . Direct to the sarthi project directory -> then to the server directory by using :
+```
+cd server
+```
+
+2 . Install dependencies :
+```
+npm install
+```
+
+3 . Add A Environment Variable File `.env` having the Variables : 
+```
+MONGO_URI=<YOUR-MONGODB-ATLAS-DATABASE-URL>
+PORT=<PORT-YOUR-WANT-YOUR-BACKEND-TO-RUN>
+
+CLOUDINARY_CLOUD_NAME=<YOUR-CLOUDINARY_CLOUD_NAME>
+CLOUDINARY_API_KEY=<YOUR-CLOUDINARY_API_KEY>
+CLOUDINARY_API_SECRET=<YOUR-CLOUDINARY_API_SECRET>
+
+#If your dont have these details create one on https://ethereal.email/ and create a demo account
+MAIL_HOST=<MAIL-HOST>
+MAIL_PORT=<MAIL-PORT>
+MAIL_AUTH_USER=<MAIL_AUTH_USER>
+MAIL_AUTH_PASSWORD=<MAIL_AUTH_PASSWORD>
+
+JWT_SECRET_KEY=<YOUR-JWT_SECRET_KEY>
+```
+
+3 . Run client on localhost :
+
+```
+npm run dev
+```
+
+
+This will launch the application frontend in your default web browser.
+>You can access it at `http://localhost:5173`
+
+
 
 <div>
  

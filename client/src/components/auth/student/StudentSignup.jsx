@@ -1,13 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
 import image1 from "../../../assets/img1.png";
 import { useTheme } from "../../providers/ThemeProvider";
-import { account, client } from "../../utils/appwrite";
 import { studentRegister } from "../../api/studentapi";
 import { useDispatch } from "react-redux";
 import { setAuthToken } from "../../../redux/studentSlice";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 const StudentSignup = () => {
     const dispatch = useDispatch();
@@ -20,8 +20,9 @@ const StudentSignup = () => {
         password: "",
         confirmPassword: "",
     });
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [error, setError] = useState(null);
-
     const [isGoogleLogin, setIsGoogleLogin] = useState(false);
 
     const handleChange = (e) => {
@@ -43,58 +44,32 @@ const StudentSignup = () => {
                 { email: inputs.email }
             );
             alert(response.data.message);
-            setInputs({
-                name: "",
-                email: "",
-                phoneNo: "",
-                password: "",
-                confirmPassword: "",
-            });
             navigate("/otpverifystudent", { state: { userData: inputs } });
         } catch (error) {
             alert(error.response.data.message);
         }
     };
 
-    // const handleGoogleLogin = async () => {
-    //     setIsGoogleLogin(true);
-    //     account.createOAuth2Session(
-    //         "google",
-    //         "http://localhost:5173",
-    //         "http://localhost:5173/fail"
-    //     );
-    //     getGoogleLoginUser();
-    // };
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
-    // const getGoogleLoginUser = async () => {
-    //     try {
-    //         const user = await account.get();
-    //         console.log(user);
-    //     } catch (err) {
-    //         console.log(
-    //             "Error Have Been Caught in the fetching of the user Details"
-    //         );
-    //     }
-    // };
+    const toggleConfirmPasswordVisibility = () => {
+        setShowConfirmPassword(!showConfirmPassword);
+    };
 
-    // Student Google Login
     const handleGoogleLogin = async () => {
         setIsGoogleLogin(true);
 
         try {
-            await account.createOAuth2Session(
-                "google",
-                "http://localhost:5173/studentlogin/",
-                "http://localhost:5173/"
-            );
+            // Perform Google OAuth login logic here
 
-            const user = await getGoogleLoginUser();
-
-            // Check if user data is fetched successfully
-            if (!user || user.message) {
-                alert("The User Information is not fetched");
-                return;
-            }
+            // Mock data for illustration purposes
+            const user = {
+                name: "Google User",
+                email: "googleuser@example.com",
+                // Add other necessary fields fetched from Google
+            };
 
             // Prepare data for registration
             const data = {
@@ -141,41 +116,25 @@ const StudentSignup = () => {
         }
     };
 
-    // Mock function for getGoogleLoginUser for illustration purposes
-    const getGoogleLoginUser = async () => {
-        try {
-            const user = await account.get();
-            console.log(user);
-            return user;
-        } catch (err) {
-            console.log("Error Message is: ", err);
-            return {
-                message: "There was an error while Fetching the Google Data",
-            };
-        }
-    };
-
-    // const HandleGoogleLogout = async () => {
-    //     await account.deleteSession("current");
-    //     console.log("The User Have Been Logout Successfully");
-    // };
-
     return (
         <div
             className={`w-full min-h-screen flex items-center justify-center p-4 bg-cover bg-center ${
                 isDarkMode ? "bg-custom-gradient text-black" : " bg-white "
-            } `}>
+            } `}
+        >
             <motion.div
                 className="w-[900px] flex rounded-lg shadow-lg overflow-hidden"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}>
+                transition={{ duration: 0.8 }}
+            >
                 <div
                     className={`flex-[1.5] flex flex-col  p-10 ${
                         isDarkMode
                             ? " bg-card-custom-gradient "
                             : " bg-teal-500 text-black"
-                    }`}>
+                    }`}
+                >
                     <div className="flex justify-start items-start pb-6 text-2xl font-bold">
                         <h1 className=" text-green-400">Sarthi</h1>
                     </div>
@@ -184,7 +143,8 @@ const StudentSignup = () => {
                         className="flex flex-col items-center w-full"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3, duration: 0.8 }}>
+                        transition={{ delay: 0.3, duration: 0.8 }}
+                    >
                         <h1 className="text-4xl font-[serif] mb-5 ">
                             Create Your Account
                         </h1>
@@ -215,27 +175,50 @@ const StudentSignup = () => {
                             required={!isGoogleLogin}
                             className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
                         />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            name="password"
-                            onChange={handleChange}
-                            value={inputs.password}
-                            required={!isGoogleLogin}
-                            className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
-                        />
-                        <input
-                            type="password"
-                            placeholder="Confirm password"
-                            name="confirmPassword"
-                            onChange={handleChange}
-                            value={inputs.confirmPassword}
-                            required={!isGoogleLogin}
-                            className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
-                        />
-                        {
-                            // Buttons For Login in With Google and Normal one
-                        }
+                        <div className="relative w-[370px] mb-4">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Password"
+                                name="password"
+                                onChange={handleChange}
+                                value={inputs.password}
+                                required={!isGoogleLogin}
+                                className="w-full py-4 px-6 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
+                            />
+                            <button
+                                type="button"
+                                className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-500"
+                                onClick={togglePasswordVisibility}
+                            >
+                                {showPassword ? (
+                                    <IoEyeOffOutline size={24} />
+                                ) : (
+                                    <IoEyeOutline size={24} />
+                                )}
+                            </button>
+                        </div>
+                        <div className="relative w-[370px] mb-4">
+                            <input
+                                type={showConfirmPassword ? "text" : "password"}
+                                placeholder="Confirm password"
+                                name="confirmPassword"
+                                onChange={handleChange}
+                                value={inputs.confirmPassword}
+                                required={!isGoogleLogin}
+                                className="w-full py-4 px-6 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
+                            />
+                            <button
+                                type="button"
+                                className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-500"
+                                onClick={toggleConfirmPasswordVisibility}
+                            >
+                                {showConfirmPassword ? (
+                                    <IoEyeOffOutline size={24} />
+                                ) : (
+                                    <IoEyeOutline size={24} />
+                                )}
+                            </button>
+                        </div>
                         {error && (
                             <p className=" text-red-500 text-sm">{error}</p>
                         )}
@@ -245,7 +228,8 @@ const StudentSignup = () => {
                                 className="bg-teal-500 text-white font-bold text-md py-3 px-8 rounded-full transition-all hover:bg-teal-600"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                onClick={handleGoogleLogin}>
+                                onClick={handleGoogleLogin}
+                            >
                                 Sign up with Google
                             </motion.button>
                             <motion.button
@@ -253,7 +237,7 @@ const StudentSignup = () => {
                                 className="bg-teal-500 text-white font-bold text-md py-3 px-8 rounded-full transition-all hover:bg-teal-600"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                onClick={() => setIsGoogleLogin(false)}>
+                            >
                                 Sign up
                             </motion.button>
                         </div>
@@ -264,8 +248,15 @@ const StudentSignup = () => {
                         isDarkMode
                             ? "bg-card-custom-gradient"
                             : " bg-teal-500 text-white"
-                    }`}>
-                    <img src={image1} alt="Hello" height={300} width={300} />
+                    }`}
+                >
+                    <img
+                        src={image1}
+                        alt="Hello"
+                        height={300}
+                        width={300}
+                        className="mb-4"
+                    />
                     <h1 className="text-white text-2xl font-[serif]">
                         Already a registered student?
                     </h1>
@@ -274,7 +265,8 @@ const StudentSignup = () => {
                             type="button"
                             className="mt-6 bg-white text-teal-500 font-bold text-md py-2 px-6 rounded-full transition-all hover:bg-gray-100"
                             whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}>
+                            whileTap={{ scale: 0.9 }}
+                        >
                             Sign in
                         </motion.button>
                     </Link>

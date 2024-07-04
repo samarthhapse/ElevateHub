@@ -1,69 +1,87 @@
-import asyncHandler from 'express-async-handler';
-import Message from '../models/message-model.js';
-import Chat from '../models/chat-model.js';
-import { Student } from '../models/student-model.js';
-import { Expert } from '../models/expert-model.js';
+import asyncHandler from "express-async-handler";
+import Chat from "../models/chat-model.js";
+import { Expert } from "../models/expert-model.js";
+import { Student } from "../models/student-model.js";
+import Message from "../models/message-model.js";
+import { getSocketId, io } from "../socket/socket.js";
 
+const getUserModel = async (id) => {
+  const expert = Expert.findById(id);
+  if (expert) {
+    return "Expert";
+  }
+  const student = Student.findById(id);
+  if (student) {
+    return "Student";
+  }
+  return null;
+};
 
-
-// Function to get all messages in a chat
-const allMessages = asyncHandler(async (req, res) => {
+export const getMessages = async (req, res) => {
   try {
-    const messages = await Message.find({ chat: req.params.chatId })
-      .populate({
-        path: "sender",
-        select: "name avatar email",
-      })
-      .populate("chat");
-    res.json(messages);
+    const { id:receiverId } = req.params;
+    const senderId = req.userId;
+   
+    const chat = await Chat.findOne({
+      participants: { $all: [senderId, receiverId] },
+    }).populate("messages");
+  
+    if (!chat) return res.status(200).json([]);
+
+    const messages = chat.messages;
+
+    res.status(200).json(messages);
   } catch (error) {
-    res.status(400);
-    throw new Error(error.message);
+    console.log("Error in getMessages controller: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
   }
-});
+};
 
-// Function to send a message
-const sendMessage = asyncHandler(async (req, res) => {
-  const { content, chatId, senderModel } = req.body;
-
-  if (!content || !chatId || !senderModel) {
-    console.log("Invalid data passed into request");
-    return res.sendStatus(400);
-  }
-
-  const newMessage = {
-    sender: req.body.user._id,
-    senderModel: senderModel,
-    content: content,
-    chat: chatId,
-  };
-
+export const sendMessage = async (req, res) => {
   try {
-    let message = await Message.create(newMessage);
-
-    message = await message.populate({
-      path: "sender",
-      select: "name avatar",
-      model: senderModel
-    })
-
-    message = await message.populate("chat");
-
-    message = await Chat.populate(message, {
-      path: "chat.users",
-      select: "name avatar email",
+    let { message, senderModel } = req.body;
+    const { id: receiverId } = req.params;
+    const senderId = req.userId;
+   
+    const receiverModel = await getUserModel(receiverId);
+  
+    senderModel = senderModel?.charAt(0).toUpperCase() + senderModel?.slice(1);
+    if (!receiverModel) {
+      return res.status(404).json({ error: "receiver not found" });
+    }
+    let chat = await Chat.findOne({
+      participants: { $all: [senderId, receiverId] },
     });
 
-    await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
+    if (!chat) {
+      chat = await Chat.create({
+        participants: [senderId, receiverId],
+      });
+    }
 
-    res.json(message);
+    const newMessage = new Message({
+      senderId,
+      receiverId,
+      message,
+      senderModel,
+      receiverModel,
+    });
+
+    if (newMessage) {
+      chat.messages.push(newMessage._id);
+    }
+
+    await Promise.all([chat.save(), newMessage.save()]);
+    const isOnline = getSocketId(receiverId)
+    if (isOnline){
+      io.to(isOnline).emit("new-message", newMessage)
+    }
+
+    res.status(201).json(newMessage);
   } catch (error) {
-    res.status(400);
-    throw new Error(error.message);
+    console.log("Error in sendMessage controller: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
   }
-});
+};
 
-export default{
-  allMessages,
-  sendMessage
-}
+

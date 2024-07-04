@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getExpertDetails } from "../api/expertapi";
+import { MdMessage } from "react-icons/md";
 
 const ExpertProfile = () => {
-    console.log("exp profile");
     const { id } = useParams();
     const [expert, setExpert] = useState(null);
 
@@ -12,15 +12,15 @@ const ExpertProfile = () => {
             try {
                 const response = await getExpertDetails(id);
                 const { data } = response;
-                console.log(data.userDetails);
-                setExpert(data.userDetails);
+                console.log(data);
+                setExpert(data.user); // Assuming 'user' is the key for expert details in your API response
             } catch (error) {
                 console.error("Failed to fetch expert", error);
             }
         };
 
         fetchExpert();
-    }, []);
+    }, [id]);
 
     if (!expert) {
         return <div>Loading...</div>;
@@ -40,6 +40,14 @@ const ExpertProfile = () => {
                         {expert.jobTitle || "No job title provided"}
                     </p>
                 </div>
+                <a
+                    className="ml-auto"
+                    href={`mailto:${expert.email}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <MdMessage />
+                </a>
             </div>
             <div className="space-y-4">
                 <p>
