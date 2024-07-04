@@ -12,7 +12,7 @@ const isAuthenticated = async (req, res, next) => {
         .json({ message: "User not authenticated.", success: false });
     }
     const jwtToken = token.replace("Bearer", "").trim();
-    // console.log(jwtToken);
+   
     const decode = jwt.verify(jwtToken, process.env.JWT_SECRET_KEY);
     if (!decode) {
       console.log("decode token not found");

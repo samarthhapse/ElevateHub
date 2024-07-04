@@ -3,6 +3,7 @@ import Chat from "../models/chat-model.js";
 import { Expert } from "../models/expert-model.js";
 import { Student } from "../models/student-model.js";
 import Message from "../models/message-model.js";
+import { getSocketId, io } from "../socket/socket.js";
 
 const getUserModel = async (id) => {
   const expert = Expert.findById(id);
@@ -20,11 +21,11 @@ export const getMessages = async (req, res) => {
   try {
     const { id:receiverId } = req.params;
     const senderId = req.userId;
-    console.log(senderId, receiverId);
+   
     const chat = await Chat.findOne({
       participants: { $all: [senderId, receiverId] },
     }).populate("messages");
-    console.log(chat);
+  
     if (!chat) return res.status(200).json([]);
 
     const messages = chat.messages;
@@ -41,9 +42,9 @@ export const sendMessage = async (req, res) => {
     let { message, senderModel } = req.body;
     const { id: receiverId } = req.params;
     const senderId = req.userId;
-    console.log("senderid: ", req.userId);
+   
     const receiverModel = await getUserModel(receiverId);
-    // console.log(senderModel);
+  
     senderModel = senderModel?.charAt(0).toUpperCase() + senderModel?.slice(1);
     if (!receiverModel) {
       return res.status(404).json({ error: "receiver not found" });
@@ -71,6 +72,10 @@ export const sendMessage = async (req, res) => {
     }
 
     await Promise.all([chat.save(), newMessage.save()]);
+    const isOnline = getSocketId(receiverId)
+    if (isOnline){
+      io.to(isOnline).emit("new-message", newMessage)
+    }
 
     res.status(201).json(newMessage);
   } catch (error) {

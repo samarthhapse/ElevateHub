@@ -6,26 +6,33 @@ import { useNavigate, useParams } from "react-router-dom";
 import Message from "./Message";
 import { sendMessage } from "../api/basicapi";
 import { getUserInfo } from "../api/basicapi";
+import io from "socket.io-client";
 const MessageContainer = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [receiver, setReceiver] = useState({});
+  const [socket, setSocket] = useState();
   const navigate = useNavigate();
 
   const { id } = useParams();
   const model = JSON.parse(localStorage.getItem("userData")).type;
-  // console.log(token);
-  const token = useSelector((state) => state[model].authToken);
+
+  const token = localStorage.getItem("userToken");
+  const userId = JSON.parse(localStorage.getItem("userData"))._id;
 
   useEffect(() => {
-    if (!token) {
-      return;
+    if (userId === id) {
+      navigate("/");
     }
-    // console.log({ id });
-    getUserInfo({id})
+    const socket = io("http://localhost:5000", {
+      query: {
+        userId,
+      },
+    });
+    setSocket(socket);
+    getUserInfo({ id })
       .then((res) => {
-        // console.log(res.data.user);
-        setReceiver(res.data.user)
+        setReceiver(res.data.user);
       })
       .catch((err) => {
         navigate("/not-found");
@@ -35,9 +42,13 @@ const MessageContainer = () => {
       console.log(res.data);
       setMessages(res.data);
     });
-  }, [token, id]);
-  console.log(receiver);
-
+    return () => socket.close();
+  }, []);
+  useEffect(() => {
+    socket?.on("new-message", (msg) => {
+      setMessages((prev) => [...prev, msg]);
+    });
+  }, [socket]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (message.length < 1) {
@@ -49,8 +60,9 @@ const MessageContainer = () => {
       message,
       senderModel: model,
     });
+    console.log(response.data);
     setMessage("");
-    console.log(response);
+    setMessages((prev) => [...prev, response.data]);
   };
 
   return (
@@ -62,7 +74,11 @@ const MessageContainer = () => {
         </div>
         <div className="w-full h-4/5 border px-4 py-2 flex flex-col overflow-auto">
           {messages.map((msg) => (
-            <Message key={msg._id} message={msg.message} fromUser={msg.senderId !== id}/>
+            <Message
+              key={msg._id}
+              message={msg.message}
+              fromUser={msg.senderId !== id}
+            />
           ))}
         </div>
         <form className="" onSubmit={handleSubmit}>

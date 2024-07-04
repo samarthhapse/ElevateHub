@@ -7,12 +7,15 @@ import expertRoute from "./routes/expertRoute.js";
 import otpRoute from "./routes/otpRoute.js";
 import userRoute from "./routes/userRoute.js"
 
+
 import messageRoutes from "./routes/messageRoute.js";
-import { Server } from "socket.io";
+
+import { app, server } from "./socket/socket.js";
+
 
 dotenv.config({});
 
-const app = express();
+
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
@@ -25,7 +28,7 @@ app.use("/api/v1/otp", otpRoute);
 app.use("/api/v1/message", messageRoutes);
 app.use("/api/v1/user", userRoute);
 
-const server = app.listen(PORT, () => {
+server.listen(PORT, () => {
   connectDB().then(() => {
     console.log(`Server Listening on : http://localhost:${PORT}`);
   });
