@@ -2,13 +2,40 @@ import express from 'express';
 import nodemailer from 'nodemailer';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
+import cors from "cors";
+import connectDB from "./config/connection.js";
+import studentRoute from "./routes/studentRoute.js";
+import expertRoute from "./routes/expertRoute.js";
+import otpRoute from "./routes/otpRoute.js";
+import userRoute from "./routes/userRoute.js";
+import chatRoute from "./routes/chatRoute.js";
+
+import messageRoutes from "./routes/messageRoute.js";
+
+import { server } from "./socket/socket.js";
+
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Connect to the database
+connectDB();
+
+//Middleware
 app.use(express.json());
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+
+//Routes
+app.use("/api/v1/student", studentRoute);
+app.use("/api/v1/expert", expertRoute);
+app.use("/api/v1/otp", otpRoute);
+app.use("/api/v1/message", messageRoutes);
+app.use("/api/v1/user", userRoute);
+app.use("/api/v1/chat", chatRoute);
+
 
 // Temporary storage for signup requests
 const pendingUsers = {};
@@ -73,10 +100,6 @@ app.get('/authorize/:email', (req, res) => {
 });
 
 // Start the server
-app.listen(port, (error) => {
-  if (error) {
-    console.error('Failed to start server:', error);
-  } else {
-    console.log(`Server is running on http://localhost:${port}`);
-  }
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
