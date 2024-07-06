@@ -8,8 +8,7 @@ import { MdMessage } from "react-icons/md";
 
 const Navbar = () => {
   const { isDarkMode, toggleTheme } = useTheme();
-  const isLoggedIn = useSelector(state => state.expert.authToken || state.student.authToken)
-  console.log(isLoggedIn);
+  
 
   useEffect(() => {
     const d = document.body;
@@ -64,15 +63,7 @@ const Navbar = () => {
           >
             Events
           </Link>
-          {isLoggedIn && (
-            <Link
-              key="chats"
-              to="/chats"
-              className="text-gray-800 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 transition duration-300"
-            >
-              <MdMessage />
-            </Link>
-          )}
+          
         </div>
         <div className="flex items-center space-x-4">
           <Link to="/Landing">
