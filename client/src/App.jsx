@@ -25,6 +25,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setExpertAuthToken, setExpertData } from "./redux/expertSlice";
 import { setStudentAuthToken, setStudentData } from "./redux/studentSlice";
+import Chats from "./components/chat/Chats";
 
 function App() {
   const dispatch = useDispatch();
@@ -69,6 +70,7 @@ function App() {
           <Route path="/expert/:id" element={<ExpertProfile />} />
           <Route path="/message/:id" element={<MessageContainer />} />
           <Route path="/not-found" element={<PageNotFound />} />
+          <Route path="/chats" element={<Chats/>}/>
 
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
