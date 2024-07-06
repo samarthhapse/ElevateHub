@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import { useTheme } from "../providers/ThemeProvider";
 import Logo from "./Logo";
+import {useSelector} from "react-redux"
+import { MdMessage } from "react-icons/md";
 
 const Navbar = () => {
   const { isDarkMode, toggleTheme } = useTheme();
+  
 
   useEffect(() => {
     const d = document.body;
@@ -60,6 +63,7 @@ const Navbar = () => {
           >
             Events
           </Link>
+          
         </div>
         <div className="flex items-center space-x-4">
           <Link to="/Landing">

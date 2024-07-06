@@ -4,6 +4,8 @@ import Input from "../Basic/Input";
 import { updateExpertDetails } from "../api/expertapi";
 import { setExpertData } from "../../redux/expertSlice";
 import { useDispatch } from "react-redux";
+import { Link} from "react-router-dom"
+import {MdMessage} from "react-icons/md"
 
 const ExpertHome = () => {
   const token = useSelector((state) => state.expert.authToken);
@@ -53,6 +55,15 @@ const ExpertHome = () => {
   };
   return (
     <div className="w-4/5 m-auto border rounded-md mt-12">
+      <div className="flex justify-center pt-6">
+        <Link
+          key="chats"
+          to="/chats"
+          className="text-gray-800 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 transition duration-300"
+        >
+          <MdMessage />
+        </Link>
+      </div>
       <div className="flex flex-wrap p-10 gap-6 justify-evenly">
         {Object.keys(inputs).map((input) => (
           <Input
@@ -83,11 +94,13 @@ const ExpertHome = () => {
           </select>
         </div>
       </div>
+
       {error && (
         <div className=" w-full text-center">
           <p className=" text-red-600 ">{error}</p>
         </div>
       )}
+
       {editMode ? (
         <button
           className="w-40 h-10 rounded-md bg-green-500  mx-6 mb-4"

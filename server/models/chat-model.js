@@ -4,8 +4,15 @@ const chatSchema = new mongoose.Schema(
   {
     participants: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        user: {
+          type: mongoose.Schema.Types.ObjectId,
+          refPath: "participants.userType",
+        },
+        userType: {
+          type: String,
+          enum: ["Expert", "Student"],
+          required: true,
+        },
       },
     ],
     messages: [
@@ -20,5 +27,4 @@ const chatSchema = new mongoose.Schema(
 );
 
 const Chat = mongoose.model("chat", chatSchema);
-
 export default Chat;
