@@ -1,6 +1,10 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
-const bcrypt = require('bcrypt');
+import express from 'express';
+import nodemailer from 'nodemailer';
+import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const app = express();
 const port = 3000;
 
@@ -40,7 +44,6 @@ app.post('/signup', async (req, res) => {
     subject: 'New Expert Signup',
     text: `A new expert has signed up.\n\nName: ${name}\nEmail: ${email}\n\nTo authorize this user, visit: http://localhost:${port}/authorize/${email}`
   };
-  
 
   // Send the email
   transporter.sendMail(mailOptions, (error, info) => {
