@@ -5,9 +5,51 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>sarthi</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+      
+      body {
+        background-color: #ffffff;
+        background-image: url(https://www.transparenttextures.com/patterns/arches.png);
+        margin: 0; /* Ensure no margin around the body */
+        font-family: 'Rubik', sans-serif;
+      }
+
+      #translate-container {
+        position: fixed;
+        top: 80px; /* Increased to push the box further down from the top */
+        left: 20px; /* Keeps the box aligned to the left */
+        background: #fff;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        font-family: 'Mukta', sans-serif; /* Font style for the translate container */
+      }
+
+      .dark-mode {
+        background-color: #343434;
+        background-image: url(https://www.transparenttextures.com/patterns/arches.png);
+      }
+      .dark-mode p,
+      .dark-mode h2,
+      .dark-mode h3 {
+        color: white;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+    <div id="translate-container">
+      <div id="google_translate_element"></div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+      }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </body>
 </html>
