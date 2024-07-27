@@ -17,6 +17,35 @@
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Global CSS or in a CSS Module */
+.neon-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.neon-border::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: linear-gradient(45deg, rgba(255, 0, 150, 0.7), rgba(0, 204, 255, 0.7));
+  z-index: -1;
+  filter: blur(10px);
+  animation: neon-pulse 1.5s infinite alternate;
+}
+
+@keyframes neon-pulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
 
 /* .bg-card-custom-gradient:hover {
   background: rgba(255, 255, 255, 0.2);
