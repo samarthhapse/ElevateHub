@@ -7,7 +7,7 @@ import expertRoute from "./routes/expertRoute.js";
 import otpRoute from "./routes/otpRoute.js";
 import userRoute from "./routes/userRoute.js";
 import chatRoute from "./routes/chatRoute.js";
-
+import paymentRoute from "./routes/paymentRoute.js";
 import messageRoutes from "./routes/messageRoute.js";
 
 import { app, server } from "./socket/socket.js";
@@ -26,6 +26,7 @@ app.use("/api/v1/otp", otpRoute);
 app.use("/api/v1/message", messageRoutes);
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/chat", chatRoute);
+app.use("/api/v1/payment",paymentRoute)
 
 server.listen(PORT, () => {
   connectDB().then(() => {
