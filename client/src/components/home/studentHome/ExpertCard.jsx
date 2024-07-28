@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ExpertCard = ({ expert, onPayNow }) => {
+const ExpertCard = ({ expert}) => {
   return (
     <div className="w-64 rounded overflow-hidden shadow-lg bg-gray-800 text-white p-4 m-4">
       <Link to={`/expert/${expert._id}`}>
@@ -13,12 +13,6 @@ const ExpertCard = ({ expert, onPayNow }) => {
           <p className="text-gray-300 text-base">Field: {expert.field}</p>
         </div>
       </Link>
-      <button
-        onClick={() => onPayNow(expert._id)}
-        className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Pay Now
-      </button>
     </div>
   );
 };

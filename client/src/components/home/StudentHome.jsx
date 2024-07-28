@@ -40,54 +40,7 @@ const StudentHome = () => {
     setExperts(expert);
   }, [selectedExpertise]);
 
-  const handlePayNow = async (expertId) => {
-    try {
-      const response = await axios.post("http://localhost:5000/api/v1/payment/checkout", {
-        amount: 500, 
-      });
-
-      const { order } = response.data;
-
-      const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
-        amount: order.amount,
-        currency: "INR",
-        name: "Sarthi",
-        description: "Expert Assistance Payment",
-        order_id: order.id,
-        handler: async function (response) {
-          try {
-            const verifyResponse = await axios.post("http://localhost:5000/api/v1/payment/paymentverification", {
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-            });
-
-            if (verifyResponse.data.success) {
-              alert(`Payment successful for expert ${expertId}`);
-            } else {
-              alert("Payment verification failed");
-            }
-          } catch (error) {
-            console.error("Verification failed", error);
-          }
-        },
-        prefill: {
-          name: "Your Name",
-          email: "your-email@example.com",
-          contact: "Your Phone Number",
-        },
-        theme: {
-          color: "#3399cc",
-        },
-      };
-
-      const rzp1 = new window.Razorpay(options);
-      rzp1.open();
-    } catch (error) {
-      console.error("Payment failed", error);
-    }
-  };
+ 
 
   return (
     <>
@@ -111,7 +64,7 @@ const StudentHome = () => {
 
       <div className="w-screen p-10 flex gap-8 flex-wrap">
         {experts.map((expert) => (
-          <ExpertCard expert={expert} key={expert._id} onPayNow={handlePayNow} />
+          <ExpertCard expert={expert} key={expert._id}  />
         ))}
       </div>
     </>
