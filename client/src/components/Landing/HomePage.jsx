@@ -33,6 +33,15 @@ const HomePage = () => {
               Try it yourself
             </button>
             </Link>
+
+            <div>
+                <Link to="/room">
+            <button  className="bg-blue-600  flex  text-white px-6 py-3 rounded-3xl shadow-lg hover:bg-blue-700 transition duration-300">
+              Let's Meet 
+            </button>
+            </Link>
+            </div>
+            
           </div>
         </div>
         <div className="relative mt-16 h-full max-w-4xl ml-3 sm:ml-11 flex justify-end">
