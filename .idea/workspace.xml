@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d396bcac-a4e0-424d-a2c4-b76dbef297ca" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/client/.env" beforeDir="false" afterPath="$PROJECT_DIR$/client/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/api/basicapi.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/api/basicapi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/api/expertapi.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/api/expertapi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/api/studentapi.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/api/studentapi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/auth/expert/ExpertSignup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/auth/expert/ExpertSignup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/auth/student/StudentSignup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/auth/student/StudentSignup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/chat/MessageContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/chat/MessageContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/profile/ExpertProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/profile/ExpertProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/otp-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/otp-controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routes/otpRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/otpRoute.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2k3u0qES1GAUmXbNsGeomxWv6GZ" />
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d396bcac-a4e0-424d-a2c4-b76dbef297ca" name="Changes" comment="" />
+      <created>1722524363401</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1722524363401</updated>
+      <workItem from="1722524369804" duration="2000" />
+    </task>
+    <servers />
+  </component>
+</project>
