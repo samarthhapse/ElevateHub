@@ -72,13 +72,13 @@ const StudentSignup = () => {
       }`}
     >
       <motion.div
-        className="w-[900px] flex rounded-lg shadow-lg overflow-hidden"
+        className="w-full max-w-[900px] flex flex-col md:flex-row rounded-lg shadow-lg overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         <div
-          className={`flex-[1.5] flex flex-col  p-10 ${
+          className={`flex-[1.5] flex flex-col p-6 sm:p-10 ${
             isDarkMode ? " bg-card-custom-gradient " : " bg-teal-500 text-black"
           }`}
         >
@@ -92,7 +92,7 @@ const StudentSignup = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            <h1 className="text-4xl font-[serif] mb-5 ">
+            <h1 className="text-3xl sm:text-4xl font-[serif] mb-5 ">
               Create Your Account
             </h1>
             <input
@@ -102,7 +102,7 @@ const StudentSignup = () => {
               onChange={handleChange}
               value={inputs.name}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
+              className="w-full max-w-[370px] py-3 sm:py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
             />
             <input
               type="email"
@@ -111,7 +111,7 @@ const StudentSignup = () => {
               onChange={handleChange}
               value={inputs.email}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
+              className="w-full max-w-[370px] py-3 sm:py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
             />
             <input
               type="text"
@@ -120,7 +120,7 @@ const StudentSignup = () => {
               onChange={handleChange}
               value={inputs.phoneNo}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
+              className="w-full max-w-[370px] py-3 sm:py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
             />
             <input
               type="password"
@@ -129,7 +129,7 @@ const StudentSignup = () => {
               onChange={handleChange}
               value={inputs.password}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
+              className="w-full max-w-[370px] py-3 sm:py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
             />
             <input
               type="password"
@@ -138,11 +138,11 @@ const StudentSignup = () => {
               onChange={handleChange}
               value={inputs.confirmPassword}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
+              className="w-full max-w-[370px] py-3 sm:py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
             />
             <motion.button
               type="submit"
-              className="mt-4 bg-teal-500 text-white font-bold text-md py-3 px-8 rounded-full transition-all hover:bg-teal-600"
+              className="mt-4 bg-teal-500 text-white font-bold text-md py-2 sm:py-3 px-6 sm:px-8 rounded-full transition-all hover:bg-teal-600"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -155,21 +155,21 @@ const StudentSignup = () => {
             isDarkMode ? "bg-card-custom-gradient" : " bg-teal-500 text-white"
           }`}
         >
-          <img src={image1} alt="Hello" height={300} width={300} />
-          <h1 className="text-white text-2xl font-[serif]">
+          <img src={image1} alt="Hello" className="w-3/4 sm:w-full max-w-[300px] mb-6" />
+          <h1 className="text-white text-lg sm:text-2xl font-[serif] text-center">
             Already a registered student?
           </h1>
           <Link to="/studentlogin">
             <motion.button
               type="button"
-              className="mt-6 bg-white text-teal-500 font-bold text-md py-2 px-6 rounded-full transition-all hover:bg-gray-100"
+              className="mt-4 sm:mt-6 bg-white text-teal-500 font-bold text-sm sm:text-md py-2 px-4 sm:px-6 rounded-full transition-all hover:bg-gray-100"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               Sign in
             </motion.button>
           </Link>
-          <div className="mt-6">
+          <div className="mt-4 sm:mt-6">
             <GoogleLogin
               clientId="YOUR_GOOGLE_CLIENT_ID"
               render={(renderProps) => (
@@ -196,3 +196,4 @@ const StudentSignup = () => {
 };
 
 export default StudentSignup;
+
