@@ -18,13 +18,13 @@ const HomePage = () => {
     <div className= {`max-w-full overflow-x-hidden ${isDarkMode ? 'bg-newgreen text-white':''}`}>
       <div className= {`flex flex-col justify-between items-center ${isDarkMode ? 'bg-newgreen text-white':'bg-white'} min-h-screen max-w-100vw md:w-full sm:flex-row`} >
   <div className=" text-left max-w-3xl flex flex-col justify-center p-8 mt-6 sm:mr-11 sm:ml-3">
-    <h2 className="uppercase text-sm font-semibold text-gray-700 mb-2">
+    <h2 className={`uppercase text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
             10x Webinar Value & Repurpose Content with AI
           </h2>
           <h1 className={`text-5xl font-bold ${isDarkMode ? 'bg-newgreen text-white':' text-gray-800'} mb-6 sm:w-96 `}>
             Webinar software for the modern marketer
           </h1>
-          <p className="text-lg text-gray-700 mb-8">
+          <p className={`text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} mb-8`}>
             Seamlessly Design, Host, and Repurpose Company Town
           </p>
           <div className="flex space-x-4">

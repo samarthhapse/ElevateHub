@@ -95,7 +95,7 @@ const StudentLogin = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            <h1 className="text-3xl sm:text-4xl font-[serif] mb-5">Student login</h1>
+            <h1 className={`${isDarkMode ? 'text-white' : 'text-black'} text-3xl sm:text-4xl font-[serif] mb-5`}>Student login</h1>
             <input
               type="email"
               placeholder="Email"
