@@ -27,7 +27,7 @@ const sendAuthorizationEmail = async (expert) => {
         //        Field: ${expert.field}\n
         //        Job Title: ${expert.jobTitle}\n\n
         //        Please authorize this registration by clicking the following link:\n
-        //       ${process.env.SERVER_ADDRESS}/authorize?email=${expert.email}`
+        //       ${process.env.SERVER_ADDRESS}/api/v1/expert/authorize?email=${expert.email}`
 
         //OR
 
