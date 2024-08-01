@@ -1,9 +1,16 @@
 import { Expert } from "../models/expert-model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import sendAuthorizationEmail from "./auth-expert.js"
 import { Student } from "../models/student-model.js";
 import OTP from "../models/otp-model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
+const express = import('express');
+const app = (await express).default();
+
+//Expert SignUP Endpoint
+
+const pendingExperts = {};
 
 export const register = async (req, res) => {
   try {
@@ -19,6 +26,7 @@ export const register = async (req, res) => {
       confirmPassword,
       otp,
     } = req.body;
+
     if (
       !name ||
       !password ||
@@ -32,56 +40,49 @@ export const register = async (req, res) => {
         .status(400)
         .json({ message: "All fields are required", success: false });
     }
+
     if (password !== confirmPassword) {
       return res
         .status(400)
-        .json({ message: "Password do not match", success: false });
+        .json({ message: "Passwords do not match", success: false });
     }
-    user = await Expert.findOne({ email });
-    checkStudent = await Student.findOne({ email });
-    if (user || checkStudent) {
+
+    const existingUser = await Expert.findOne({ email });
+    const existingStudent = await Student.findOne({ email });
+
+    if (existingUser || existingStudent) {
       return res.status(400).json({
-        message: "Email already exist, try different email",
+        message: "Email already exists, try a different email",
         success: false,
       });
     }
 
-    const recentOtp = await OTP.findOne({ email })
-      .sort({ createdAt: -1 })
-      .limit(1);
-    if (recentOtp.length === 0) {
+    const recentOtp = await OTP.findOne({ email }).sort({ createdAt: -1 }).limit(1);
+    if (!recentOtp || otp !== recentOtp.otp) {
       return res.status(400).json({
         success: false,
-        message: "OTP Not Found!",
-      });
-    }
-    if (otp !== recentOtp.otp) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid OTP",
+        message: "Invalid or expired OTP",
       });
     }
 
     const avatarLocalPath = req.files?.avatar[0]?.path;
     if (!avatarLocalPath) {
-      console.log("avatarLocalPath not found");
       return res.status(401).json({
         success: false,
         message: "Avatar is required",
       });
     }
-    console.log(avatarLocalPath);
+
     const avatar = await uploadOnCloudinary(avatarLocalPath);
     if (!avatar) {
-      console.log("avatar not uploaded on cloudinary");
-
       return res.status(401).json({
         success: false,
-        message: "Avatar is required",
+        message: "Avatar upload failed",
       });
     }
+
     const hashedPassword = await bcrypt.hash(password, 10);
-    user = await Expert.create({
+    const newExpert = new Expert({
       name,
       email,
       phoneNo,
@@ -91,23 +92,50 @@ export const register = async (req, res) => {
       jobTitle,
       avatar: avatar.url,
     });
-    if (!user) {
-      console.log("user not created in database");
-      return res
-        .status(500)
-        .json({ message: "internal server error", success: false });
-    }
-    return res.status(201).json({
-      message: "Account created successfully.",
+
+    // Save the new expert to pending storage
+    pendingExperts[email] = newExpert;
+
+    // Send authorization email
+    await sendAuthorizationEmail(newExpert);
+
+    return res.status(200).json({
+      message: "Registration request sent. Awaiting authorization.",
       success: true,
     });
   } catch (err) {
-    console.log("error while registering", err);
-    return res
-      .status(500)
-      .json({ message: "internal server error", err, success: false });
+    console.log("Error while registering:", err);
+    return res.status(500).json({
+      message: "Internal server error",
+      err,
+      success: false,
+    });
   }
 };
+
+
+//Authorization From Owner Endpoint
+
+// Authorize the expert
+export const authorizeExpert = async (req, res) => {
+  const { email } = req.query;
+
+  if (pendingExperts[email]) {
+    try {
+      await pendingExperts[email].save();
+      delete pendingExperts[email];
+      res.status(200).json({ message: "Expert authorized and saved to the database." });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  } else {
+    res.status(400).json({ message: "No pending expert found with this email." });
+  }
+};
+
+
+
+//Expert Login Endpoint
 
 export const login = async (req, res) => {
   try {

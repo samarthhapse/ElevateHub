@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  authorizeExpert,
   changePassword,
   expertDetails,
   getAllExperts,
@@ -21,6 +22,7 @@ router.post(
   ]),
   register
 );
+router.get("/authorize",authorizeExpert)
 router.post("/login", login);
 router.post("/resetpassword", changePassword);
 router.get("/:id", expertDetails);
