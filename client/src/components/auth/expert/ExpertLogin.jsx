@@ -97,7 +97,7 @@ const ExpertLogin = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            <h1 className="text-4xl font-[serif] mb-5">Expert login</h1>
+            <h1 className={`${isDarkMode ? 'text-white' : 'text-black'} text-4xl font-[serif] mb-5`}>Expert login</h1>
             <input
               type="email"
               placeholder="Email"
@@ -131,7 +131,7 @@ const ExpertLogin = () => {
             </div>
             <a
               href="/expertforget"
-              className="text-md font-medium text-gray-950 hover:text-gray-700"
+              className={`text-md font-medium text-gray-950 hover:text-gray-700 ${isDarkMode ? 'text-white hover:text-gray-300' : 'text-black'}`}
             >
               Forget password?
             </a>
