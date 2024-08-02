@@ -5,6 +5,7 @@ import otpGenerator from "otp-generator";
 import nodemailer from "nodemailer";
 import { otpTemplate } from "../utils/emailTemplates.js";
 import { sendMail } from "../utils/mailer.js";
+
 const sendOTP = async (req, res) => {
   try {
     const { email } = req.body;
