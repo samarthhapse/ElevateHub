@@ -4,17 +4,16 @@ import { getExpertDetails } from '../api/expertapi';
 import { MdMessage } from 'react-icons/md';
 import axios from 'axios';
 
-const ExpertProfile = ({ onPayNow }) => {
-  console.log("exp profile");
+const ExpertProfile = () => {
   const { id } = useParams();
   const [expert, setExpert] = useState(null);
+  const [amount, setAmount] = useState();
 
   useEffect(() => {
     const fetchExpert = async () => {
       try {
         const response = await getExpertDetails(id);
         const { data } = response;
-        console.log(data);
         setExpert(data.user);
       } catch (error) {
         console.error('Failed to fetch expert', error);
@@ -28,10 +27,10 @@ const ExpertProfile = ({ onPayNow }) => {
     return <div>Loading...</div>;
   }
 
-  const handlePayNow = async (expertId) => {
+  const handlePayNow = async () => {
     try {
       const response = await axios.post('http://localhost:5000/api/v1/payment/checkout', {
-        amount: 500,
+        amount,
       });
 
       const { order } = response.data;
@@ -52,7 +51,7 @@ const ExpertProfile = ({ onPayNow }) => {
             });
 
             if (verifyResponse.data.success) {
-              alert(`Payment successful for expert ${expertId}`);
+              alert(`Payment successful for expert ${id}`);
             } else {
               alert('Payment verification failed');
             }
@@ -112,9 +111,19 @@ const ExpertProfile = ({ onPayNow }) => {
           <strong>Connected Students:</strong> {expert.connectedStudents.length}
         </p>
       </div>
+      <div className="mt-4">
+        <label htmlFor="amount" className="block text-lg font-medium">Amount:</label>
+        <input
+          type="number"
+          id="amount"
+          value={amount}
+          onChange={(e) => setAmount(Number(e.target.value))}
+          className="mt-2 p-2 border border-gray-600 rounded bg-gray-700 text-white"
+        />
+      </div>
       <div className="flex justify-center mt-4">
         <button
-          onClick={() => handlePayNow(expert._id)}
+          onClick={handlePayNow}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Pay Now
@@ -125,4 +134,5 @@ const ExpertProfile = ({ onPayNow }) => {
 };
 
 export default ExpertProfile;
+
 
