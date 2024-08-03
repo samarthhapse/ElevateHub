@@ -15,8 +15,8 @@ import { sendConfirmationCode,authorizeExpert, confirmExpert } from "../controll
 const router = express.Router();
 //Nodemailer routes
 router.post('/authorization',authorizeExpert) ;
-router.post('sendCode',sendConfirmationCode) ;
-router.post('confirm-registration',confirmExpert)
+router.post('/sendCode',sendConfirmationCode) ;
+router.post('/confirm-registration',confirmExpert)
 //nodemailer routes 
 
 //once the above part is done the user should get the "/register" route and register himself

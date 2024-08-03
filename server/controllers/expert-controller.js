@@ -1,16 +1,13 @@
 import { Expert } from "../models/expert-model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import sendAuthorizationEmail from "./auth-expert.js"
 import { Student } from "../models/student-model.js";
 import OTP from "../models/otp-model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 const express = import('express');
 const app = (await express).default();
 
-//Expert SignUP Endpoint
 
-const pendingExperts = {};
 
 export const register = async (req, res) => {
   try {
