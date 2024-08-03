@@ -69,6 +69,17 @@ export const confirmExpert = async (req, res) => {
     const codeEntry = await ConfirmationCode.findOne({ email: email, code: confirmationCode });
 
     if (codeEntry) {
+      const info = await transporter.sendMail({
+        from: '"App Owner" <OWNERS_EMAIL>',
+        to: email,
+        subject: "Request Accepted",
+        text: `Hello, Your registration request was accepted`,
+    });
+    console.log("email sent successfully",info.messageId) ;
+    res.json({ message: 'User confirmed successfully' });
+    // Optionally, you can delete the code entry from the database
+    await ConfirmationCode.deleteOne({ _id: codeEntry._id });
+     //redirect the user to the registration page ...
         res.json({ message: 'User confirmed successfully' });
         // Optionally, you can delete the code entry from the database
         await ConfirmationCode.deleteOne({ _id: codeEntry._id });
