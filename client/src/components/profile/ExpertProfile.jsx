@@ -112,14 +112,28 @@ const ExpertProfile = ({ onPayNow }) => {
           <strong>Connected Students:</strong> {expert.connectedStudents.length}
         </p>
       </div>
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-4 p-5">
+      <div>
         <button
           onClick={() => handlePayNow(expert._id)}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Pay Now
         </button>
+        </div>
+        <div className='pl-4'>
+    
+              <Link to="/room">
+            <button                      
+             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+             Connect
+            </button>
+            </Link>
+        </div>
+       
       </div>
+      
     </div>
   );
 };
