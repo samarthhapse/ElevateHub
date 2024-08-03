@@ -82,8 +82,7 @@ export const confirmExpert = async (req, res) => {
      //redirect the user to the registration page ...
         res.json({ message: 'User confirmed successfully' });
         // Optionally, you can delete the code entry from the database
-        await ConfirmationCode.deleteOne({ _id: codeEntry._id });
-        await Expert.deleteOne({email : email}) //redirect the user to the registration page ...
+        await ConfirmationCode.deleteOne({ _id: codeEntry._id }); //redirect the user to the registration page ..
     } else {
         res.status(400).json({ message: 'Invalid confirmation code' });
     }
