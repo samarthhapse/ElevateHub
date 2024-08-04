@@ -1,0 +1,33 @@
+//RESPONSIVE BREAKPOINTS
+
+$bp-largest: 75em; // 1200px/16px(default font-size by most browsers) = 75
+$bp-large: 68.75em; // 1100px/16px(default font-size by most browsers) 68.75em
+$bp-medium: 56.25em; // 900px/16px(default font-size by most browsers) 56.25em
+$bp-small: 37.5em; // 600px/16px(default font-size by most browsers) 37.5em
+$bp-smallest: 31.25em; // 500px/16px(default font-size by most browsers) 31.25em
+$bp-smartphone: 30em; // 480px/16px(default font-size by most browsers) 30em
+
+//BOBY-BACKGROUND COLORS
+$bckg-gradient-light-black: #1f2a37;
+
+// GENERAL 
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; // 10px/16px(default font-size by most browsers) = 62.5%
+}
+
+body {
+    font-family: 'Questrial', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow: hidden;
+}
