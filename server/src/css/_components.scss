@@ -1,0 +1,746 @@
+button {
+  background: transparent;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+}
+
+button:hover {
+  opacity: 0.5;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+}
+
+button:active {
+  outline: none;
+  border: none;
+}
+
+button:focus {
+  outline: 0;
+}
+
+// Dashboard Components
+
+.header_dashboard_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo_container {
+  margin: 2rem;
+}
+
+.logo {
+  height: 2.65rem;
+  width: 4.55rem;
+}
+
+.close_dashboard_container_button {
+  width: 5rem;
+     height: 5rem;
+     background: rgba(0, 0, 0, 0.2);
+     border-radius: 50px;
+     transition: 0.3s;
+     margin-right: 2rem;
+     cursor: pointer;
+
+     @media only screen and (min-width: $bp-medium) {
+       display: none;
+    }
+}
+
+.description_container {
+  margin: 0 2rem;
+
+  @media only screen and (min-width: $bp-small) and (max-width: $bp-medium) {
+    margin: 0 25vw;
+     margin-top: 15rem;
+  }
+
+}
+
+.description_container_paragraph {
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: #d3d3d3;
+}
+
+.personal_code_container {
+  height: 7rem;
+  margin: 0 2rem;
+  background: rgba(196, 196, 196, 0.2);
+  backdrop-filter: blur(80px);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  @media only screen and (min-width: $bp-small) and (max-width: $bp-medium) {
+    margin: 0 25vw;
+  }
+}
+
+.personal_code_title_container {
+  padding: 0 1.5rem;
+}
+
+.personal_code_title_paragraph {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #d3d3d3;
+}
+
+.personal_code_value_container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1.5rem;
+  align-items: center;
+  color: #ffffff;
+}
+
+.personal_code_value_paragraph {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.personal_code_copy_button {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2px;
+  background: transparent;
+  transition: 0.5s;
+  cursor: pointer;
+
+  &__tooltiptext {
+    visibility: hidden;
+    width: 6rem;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 20%;
+    margin-left: -4rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &__tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 20%;
+  margin-left: 3rem;
+  border-width: 0.5rem;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+}
+
+.personal_code_connecting_container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 2rem;
+
+  @media only screen and (min-width: $bp-small) and (max-width: $bp-medium) {
+    margin: 0 25vw;
+  }
+}
+
+.personal_code_connecting_paragraph {
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: #d3d3d3;
+}
+
+.personal_code_connecting_input_container {
+  width: 100%;
+  height: 4rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  
+  
+
+  & > img {
+    position: absolute;
+    right: 1.5rem;
+  }
+}
+
+.personal_code_input:focus {
+  outline: none;
+}
+
+.personal_code_input {
+  width: 100%;
+  height: 100%;
+  background: rgba(196, 196, 196, 0.2);
+  backdrop-filter: blur(80px);
+  border-radius: 8px;
+  border: hidden;
+  color: white;
+  padding: 0 1.5rem;
+}
+
+.personal_code_connecting_buttons_container {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.connecting_button_chat {
+  background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  100%);
+  padding: 1.2rem 0;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: bold;
+  background-size: 200% auto;
+  width: 48%;
+  border-radius: 5px;
+  border-color: #555 transparent transparent transparent;
+  transition: 0.5s;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+    &:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+    opacity: 1;
+    }
+}
+
+.connecting_button_videocall {
+  background-image: linear-gradient(to right, #00c6ff 0%, #0072ff  51%, #00c6ff  100%);
+  padding: 1.2rem 0;    
+  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: bold;
+  background-size: 200% auto;
+  width: 48%;
+  border-radius: 5px;
+  border-color: #555 transparent transparent transparent;
+  transition: 0.5s;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+    &:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+    opacity: 1;
+    }
+}
+
+.stranger_connecting_container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 2rem;
+
+  @media only screen and (min-width: $bp-small) and (max-width: $bp-medium) {
+    margin: 0 25vw;
+  }
+}
+
+.stranger_title_container {
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: #d3d3d3;
+}
+
+.stranger_buttons_container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkbox_container {
+  display: flex;
+  margin: 0 2rem;
+  margin-bottom: 2.5rem;
+  align-items: center;
+
+  @media only screen and (min-width: $bp-small) and (max-width: $bp-medium) {
+    margin: 0 25vw;
+    margin-bottom: 25.5rem;
+  }
+}
+
+.checkbox_connection {
+  width: 2rem;
+  height: 2rem;
+  background: rgba(196, 196, 196, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  backdrop-filter: blur(80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox_container_paragraph {
+  font-weight: 500;
+  font-size: 1.6rem;
+  margin-left: 1.5rem;
+  color: #d3d3d3;
+}
+
+// VideoCall Components
+.menu_container_small_and_medium_devices {
+  display: none;
+
+  @media only screen and (max-width: $bp-medium) {
+    visibility: visible;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 2rem;
+    }
+}
+
+ .menu_buttons_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.video_chat_dashboard_button {
+  width: 5rem;
+  height: 5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.chat_message_display_button {
+  width: 5rem;
+  height: 5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  transition: 0.3s;
+  cursor: pointer;
+
+     @media only screen and (min-width: $bp-small) {
+       display: none;
+    }
+}
+
+.videos_container {
+  position: relative;
+  height: calc(100% - 12rem);
+  margin: 6rem 2rem;
+  border-radius: 15px;
+  background: rgba(196, 196, 196, 0.2);
+  backdrop-filter: blur(80px);
+  overflow: hidden;
+}
+
+.videos_placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  & > img {
+    max-width: 25%;
+  }
+}
+
+.local_video_container {
+  position: absolute;
+  width: 18rem;
+  max-height: 18rem;
+  top: 15px;
+  left: 15px;
+  overflow: hidden;
+}
+
+.local_video {
+  width: 100%;
+  height: 100%;
+}
+
+.remote_video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.call_buttons_container {
+  position: absolute;
+  width: 100%;
+  height: 7.5rem;
+  bottom: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+}
+
+.call_button_small {
+  width: 5rem;
+  height: 5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.call_button_large {
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 75px;
+  background: #fc5d5b;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.finish_chat_button_container {
+  position: absolute;
+  width: 39.5rem;
+  height: 7.5rem;
+  bottom: 40px;
+  left: calc(50% - 20rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+//Dialog Components
+
+.dialog_wrapper {
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(30px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  top: 0;
+}
+
+.dialog_content {
+  width: 52rem;
+  height: 53rem;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(60px);
+  box-shadow: 0px 2px 20px 5px rgba(10, 145, 219, 0.05);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.dialog_title {
+  font-weight: 600;
+  font-size: 2.2rem;
+  color: rgb(235, 235, 235);
+}
+
+.dialog_image_container {
+  width: 27.5rem;
+  height: 27.5rem;
+  border-radius: 27.5rem;
+  background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog_description {
+  font-size: 2rem;
+  color: rgb(235, 235, 235);
+  font-weight: 500;
+  padding: 0 4rem;
+}
+
+.dialog_button_container {
+  height: 55px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.dialog_accept_call_button {
+  width: 18rem;
+  height: 5.5rem;
+  background: linear-gradient(180deg, #00c920 0%, #2fe24b 100%);
+  box-shadow: 0px 2px 42px 10px rgba(47, 226, 75, 0.15);
+  border-radius: 1.5rem;
+  transition: 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.dialog_reject_call_button {
+  width: 18rem;
+  height: 5.5rem;
+  background: linear-gradient(180deg, #ff3b3b 0%, #ff6262 100%);
+  box-shadow: 0px 2px 42px 10px rgba(255, 59, 59, 0.15);
+  border-radius: 1.5rem;
+  transition: 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.dialog_button_image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.dashboard_blur {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0.218);
+  backdrop-filter: blur(0.5px);
+}
+
+// Video Recording Component
+
+.video_recording_buttons_container {
+  position: absolute;
+  width: 18rem;
+  height: 5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  backdrop-filter: blur(60px);
+  right: 20px;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   & > button {
+    cursor: pointer;
+   }
+}
+
+#stop_recording_button {
+  color: white;
+  height: 2.8rem;
+}
+
+// Messages Components
+
+.new_message_container {
+  position: relative;
+}
+.new_message_input {
+  margin: 0 2rem;
+  margin-bottom: 3rem;
+  width: calc(100% - 4rem);
+  height: 5rem;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 400;
+  background: rgba(171, 170, 170, 0.457);
+  backdrop-filter: blur(80px);
+  border-radius: 0.8rem;
+  padding: 1rem 1.5rem 1rem 5rem;
+  border: hidden;
+  
+  z-index: 2;
+}
+
+.new_message_input:focus {
+  outline: none;
+  color: #ffffff;
+}
+
+.close_button_chat_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  @media only screen and (min-width: $bp-small) {
+       display: none;
+    }
+}
+
+.close_chat_button {
+  width: 5rem;
+  height: 5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  transition: 0.3s;
+  margin-right: 2rem;
+  cursor: pointer;
+
+     @media only screen and (min-width: $bp-small) {
+       display: none;
+    }
+}
+.messages_container {
+  flex-grow: 1;
+  margin: 2rem 2rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+  border-radius: 15px;
+  background: rgba(196, 196, 196, 0.2);
+  backdrop-filter: blur(80px);
+  &::-webkit-scrollbar {
+    display: none;
+}
+}
+
+
+.message_left_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 2rem 1rem;
+  
+}
+
+.message_left_paragraph {
+  background: rgba(171, 170, 170, 0.457);
+  backdrop-filter: blur(90px);
+  border-radius: 8px 8px 8px 0px;
+  padding: 1rem 0.8rem;
+  color: #d3d3d3;
+  min-width: 6rem;
+}
+
+.message_right_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 2rem 1rem;
+}
+
+.message_right_paragraph {
+  background-color: $bckg-gradient-light-black;
+  border-radius: 8px 8px 0px 8px;
+  padding: 1rem 0.8rem;
+  color: #d3d3d3;
+  min-width: 6rem;
+}
+
+.send_message_button {
+  width: 4rem;
+  height: 4rem;
+  position: absolute;
+  right: 25px;
+  top: 5px;
+  background-color: #5198f6;
+  border-radius: 8px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.send_message_button_image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.send_emoji_button {
+  width: 4rem;
+  height: 4rem;
+  position: absolute;
+  left: 25px;
+  top: 5px;
+  background: transparent;
+  border-radius: 8px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.send_emoji_message_button {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.connecting_button_chat {
+  background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  100%);
+  padding: 1.2rem 0;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: bold;
+  background-size: 200% auto;
+  width: 48%;
+  border-radius: 5px;
+  border-color: #555 transparent transparent transparent;
+  transition: 0.5s;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+    &:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+    opacity: 1;
+    }
+}
+
+.connecting_button_videocall {
+  background-image: linear-gradient(to right, #00c6ff 0%, #0072ff  51%, #00c6ff  100%);
+  padding: 1.2rem 0;    
+  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: bold;
+  background-size: 200% auto;
+  width: 48%;
+  border-radius: 5px;
+  border-color: #555 transparent transparent transparent;
+  transition: 0.5s;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+    &:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+    opacity: 1;
+    }
+}
+
+.display_none {
+  display: none;
+}

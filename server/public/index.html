@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Welcome to Merged. A chat and video call website app, where you can talk with someone you know or talk with an anonymous random user. You have the possibility to screenshare and record and download the video calls. Have an exciting talk."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"
+      rel="stylesheet"
+    />
+    <title>merged</title>
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="images/site.webmanifest" />
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+  </head>
+  <body>
+    <audio id="ringtone">
+      <source
+        src="https://assets.mixkit.co/sfx/preview/mixkit-waiting-ringtone-1354.mp3"
+        type="audio/mp3"
+      />
+      Your browser does not support the audio element.
+    </audio>
+    <div class="main_container">
+      <div class="dashboard_container" id="dashboard-container">
+        <div class="header_dashboard_container">
+          <div class="logo_container" id="logo_container">
+            <img src="images/merged-logo.png" class="logo" alt="merged-logo" />
+          </div>
+          <button
+            class="close_dashboard_container_button display_none"
+            id="close_dashboard_container_button"
+          >
+            <img
+              src="images/closeButton.png"
+              alt="close-dashboard-container-button"
+            />
+          </button>
+        </div>
+        <div class="description_container">
+          <p class="description_container_paragraph">
+            Share the personal code with your Expert.
+          </p>
+        </div>
+        <div class="personal_code_container">
+          <div class="personal_code_title_container">
+            <p class="personal_code_title_paragraph">
+              Your personal code
+            </p>
+          </div>
+          <div class="personal_code_value_container">
+            <p
+              class="personal_code_value_paragraph"
+              id="personal_code_paragraph"
+            >
+              Daniel
+            </p>
+            <button
+              class="personal_code_copy_button"
+              id="personal_code_copy_button"
+            >
+              <img src="images/copy.png" alt="personal-code-copy-button" />
+              <span
+                class="personal_code_copy_button__tooltiptext"
+                id="tooltiptext"
+                >Copied!</span
+              >
+            </button>
+          </div>
+        </div>
+        <div class="personal_code_connecting_container">
+          <p class="personal_code_connecting_paragraph">
+            Personal Code (from someone you know)
+          </p>
+          <div class="personal_code_connecting_input_container">
+            <input class="personal_code_input" id="personal_code_input" />
+            <img src="images/paste.png" alt="personal-code-input-container" />
+          </div>
+          <div class="personal_code_connecting_buttons_container">
+            <button
+              class="connecting_button_chat"
+              id="personal_code_chat_button"
+            >
+              <img
+                src="images/chatButton.png"
+                alt="chat-button"
+                class="connecting_buttons_image"
+              />
+              Chat
+            </button>
+            <button
+              class="connecting_button_videocall display_none"
+              id="personal_code_video_button"
+            >
+              <img
+                src="images/videoButton.png"
+                alt="video-button"
+                class="connecting_buttons_image"
+              />
+              Video Call
+            </button>
+          </div>
+        </div>
+
+        <!-- <div class="stranger_connecting_container">
+          <p class="stranger_title_container">Stranger</p>
+          <div class="stranger_buttons_container">
+            <button class="connecting_button_chat" id="stranger_chat_button">
+              <img
+                src="images/chatButton.png"
+                alt="chat-button"
+                class="connecting_buttons_image"
+              />
+              Chat
+            </button>
+            <button
+              class="connecting_button_videocall display_none"
+              id="stranger_video_button"
+            >
+              <img
+                src="images/videoButton.png"
+                alt="video-button"
+                class="connecting_buttons_image"
+              />
+              Video Call
+            </button>
+          </div>
+        </div> -->
+
+        <div class="checkbox_container">
+          <div class="checkbox_connection" id="allow_strangers_checkbox">
+            <img
+              id="allow_strangers_checkbox_image"
+              src="images/check.png"
+              alt="check-input-button"
+              class="display_none"
+            />
+          </div>
+          <p class="checkbox_container_paragraph">
+            Allow connection from strangers
+          </p>
+        </div>
+        <div class="dashboard_blur display_none" id="dashboard_blur"></div>
+      </div>
+      <div class="call_container" id="call_container">
+        <div class="menu_container_small_and_medium_devices">
+          <div class="logo_container">
+            <img src="images/merged-logo.png" class="logo" alt="merged-logo" />
+          </div>
+          <div class="menu_buttons_container">
+            <button
+              class="video_chat_dashboard_button"
+              id="video_chat_dashboard_button"
+            >
+              <img
+                src="images/videoChatDashboard.png"
+                alt="video-chat-dashboard-display-button"
+              />
+            </button>
+            <button
+              class="chat_message_display_button"
+              id="chat_message_display_button"
+            >
+              <img
+                src="images/chatMessage.png"
+                alt="chat-message-display-button"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="videos_container">
+          <div id="video_placeholder" class="videos_placeholder">
+            <img src="images/merged-logo.png" alt="logo-image" />
+          </div>
+          <video
+            class="remote_video display_none"
+            autoplay
+            id="remote_video"
+          ></video>
+          <div class="local_video_container">
+            <video id="local_video" class="local_video" muted autoplay></video>
+          </div>
+          <div class="call_buttons_container display_none" id="call_buttons">
+            <button class="call_button_small" id="mic_button">
+              <img
+                src="images/mic.png"
+                alt="mic-icon-button"
+                id="mic_button_image"
+              />
+            </button>
+            <button class="call_button_small" id="camera_button">
+              <img
+                src="images/camera.png"
+                alt="camera-icon-button"
+                id="camera_button_image"
+              />
+            </button>
+            <button class="call_button_large" id="hang_up_button">
+              <img src="images/hangUp.png" alt="hang-up-icon-button" />
+            </button>
+            <button class="call_button_small" id="screen_sharing_button">
+              <img
+                src="images/screenShare.png"
+                alt="switch-camera-screen-sharing-icon-button"
+              />
+            </button>
+            <button class="call_button_small" id="start_recording_button">
+              <img
+                src="images/recordingStart.png"
+                alt="start-recording-icon-button"
+              />
+            </button>
+          </div>
+          <div
+            class="finish_chat_button_container display_none"
+            id="finish_chat_button_container"
+          >
+            <button class="call_button_large" id="finish_chat_call_button">
+              <img src="images/hangUp.png" alt="hang-up-icon-button" />
+            </button>
+          </div>
+          <div
+            class="video_recording_buttons_container display_none"
+            id="video_recording_buttons_container"
+          >
+            <button id="pause_recording_button">
+              <img src="images/pause.png" alt="pause-recording-button-icon" />
+            </button>
+            <button id="resume_recording_button" class="display_none">
+              <img src="images/resume.png" alt="resume-recording-button-icon" />
+            </button>
+            <button id="stop_recording_button">
+              <img
+                src="images/stopRecording.png"
+                alt="stop-recording-button-icon"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="messenger_container" id="messenger-container">
+        <div class="close_button_chat_container">
+          <div class="logo_container" id="logo_container">
+            <img src="images/merged-logo.png" class="logo" alt="merged-logo" />
+          </div>
+          <button class="close_chat_button display_none" id="close_chat_button">
+            <img
+              src="images/closeButton.png"
+              alt="close-dashboard-container-button"
+            />
+          </button>
+        </div>
+        <div class="messages_container" id="messages_container"></div>
+
+        <div class="new_message_container display_none" id="new_message">
+          <input
+            type="text"
+            class="new_message_input"
+            id="new_message_input"
+            placeholder="Type your message..."
+          /><button class="send_message_button" id="send_message_button">
+            <img
+              src="images/sendMessageButton.png"
+              alt="send-message-button-icon"
+              class="send_message_button_image"
+            />
+          </button>
+          <button class="send_emoji_button" id="send_emoji_button">
+            <img
+              src="images/smile.png"
+              alt="smile-message-button-icon"
+              class="send_emoji_message_button"
+            />
+          </button>
+        </div>
+      </div>
+      <div id="dialog"></div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="bundle.js"></script>
+  </body>
+</html>
