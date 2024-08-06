@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { getExpertDetails } from '../api/expertapi';
 import { MdMessage } from 'react-icons/md';
 import axios from 'axios';
+import CustomButton from '../meetings/Button';
 
 const ExpertProfile = ({ onPayNow }) => {
   console.log("exp profile");
@@ -79,6 +80,7 @@ const ExpertProfile = ({ onPayNow }) => {
 
   return (
     <div className="max-w-3xl mx-auto bg-gray-800 text-white p-6 rounded shadow-lg mt-8">
+      <CustomButton />
       <div className="flex items-center mb-6">
         <img
           className="w-32 h-32 object-cover rounded-full mr-6"

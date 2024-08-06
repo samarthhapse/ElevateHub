@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import ExpertiseCard from "./studentHome/ExpertiseCard";
 import ExpertCard from "./studentHome/ExpertCard";
+import  CustomButton  from "../meetings/Button";
 import { getAllExperts } from "../api/expertapi";
 import axios from "axios";
 // import FilterComponent from "./studentHome/Filter";
@@ -44,6 +45,7 @@ const StudentHome = () => {
 
   return (
     <>
+      <CustomButton />
       <div className="flex flex-col items-center space-y-4 mt-4">
         <label htmlFor="exp-selector" className="text-xl font-medium">
           Select an expertise:
