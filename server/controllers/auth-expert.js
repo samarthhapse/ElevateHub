@@ -18,7 +18,6 @@ const transporter = nodemailer.createTransport({
 });
 export const authorizeExpert = async (req, res) => {
   const { email, name} = req.body;
-
   const user = new User({ email: email, name: name });
   await user.save();
 
@@ -32,7 +31,9 @@ export const authorizeExpert = async (req, res) => {
                 <li><strong>Name:</strong> ${name}</li>
                 <li><strong>Email:</strong> ${email}</li>
             </ul>
-            <p>Please authorize this registration by clicking the following link:</p>`,//send the url for sharing the confirmation code where the owner has
+            <p>Please authorize this registration by clicking the following link:</p>
+            <a href="http://localhost:5173/send-code">SEND AUTHORIZATION CODE</a>
+            `,//send the url for sharing the confirmation code where the owner has
             //to give the email of the user and the code will generated auto,atically and will be sent to the experts email.
   });
 

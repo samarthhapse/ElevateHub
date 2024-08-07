@@ -61,6 +61,7 @@ const ExpertSignup = () => {
         "http://localhost:5000/api/v1/otp/sendotp",
         { email: inputs.email }
       );
+      console.log("expert sign up response  :  ",response) ;
       alert(response.data.message);
       setInputs({
         name: "",

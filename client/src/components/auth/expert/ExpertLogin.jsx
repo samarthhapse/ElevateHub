@@ -153,7 +153,7 @@ const ExpertLogin = () => {
           <h1 className="text-white text-2xl font-[serif]">
             Do not have an account?
           </h1>
-          <Link to="/expertsignup">
+          <Link to="/authorize">
             <motion.button
               type="button"
               className="mt-6 bg-white text-teal-500 font-bold text-md py-2 px-6 rounded-full transition-all hover:bg-gray-100"

@@ -30,6 +30,9 @@ import { Room } from "./components/meet/Room";
 import { CreateMeeting } from "./components/meet/CreateMeeting";
 import { JoinMeeting } from "./components/meet/JoinMeeting";
 import { VideoRoom } from "./components/meet/VideoRoom";
+import ExpertAuthorize from "./components/auth/expert/ExpertAuthorize";
+import ExpertConfirmation from "./components/auth/expert/ExpertConfirmation";
+import ExpertSendCode from "./components/auth/expert/ExpertSendCode";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +67,10 @@ function App() {
           <Route path="/studentsignup" element={<StudentSignup />} />
           <Route path="/studentlogin" element={<StudentLogin />} />
           <Route path="/studentforget" element={<StudentForget />} />
+          
+          <Route path="/authorize" element={<ExpertAuthorize />} />
+          <Route path="/send-code" element={<ExpertSendCode />} />
+          <Route path="/confirm-registration" element={<ExpertConfirmation />} />
           <Route path="/expertsignup" element={<ExpertSignup />} />
           <Route path="/expertlogin" element={<ExpertLogin />} />
           <Route path="/expertforget" element={<ExpertForget />} />
