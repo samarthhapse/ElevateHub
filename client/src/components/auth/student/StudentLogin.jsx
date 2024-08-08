@@ -6,7 +6,6 @@ import { setStudentAuthToken, setStudentData } from "../../../redux/studentSlice
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
-import { GoogleLogin } from "react-google-login";
 
 const StudentLogin = () => {
   const dispatch = useDispatch();
@@ -162,24 +161,6 @@ const StudentLogin = () => {
             </motion.button>
           </Link>
           <div className="mt-4 sm:mt-6">
-            <GoogleLogin
-              clientId="YOUR_GOOGLE_CLIENT_ID"
-              render={(renderProps) => (
-                <motion.button
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                  type="button"
-                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition-all cursor-pointer"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  Sign in with Google
-                </motion.button>
-              )}
-              onSuccess={googleSuccess}
-              onFailure={googleFailure}
-              cookiePolicy={"single_host_origin"}
-            />
           </div>
         </div>
       </motion.div>
