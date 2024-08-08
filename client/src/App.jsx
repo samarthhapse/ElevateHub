@@ -26,10 +26,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setExpertAuthToken, setExpertData } from "./redux/expertSlice";
 import { setStudentAuthToken, setStudentData } from "./redux/studentSlice";
 import Chats from "./components/chat/Chats";
-import { Room } from "./components/meet/Room";
-import { CreateMeeting } from "./components/meet/CreateMeeting";
-import { JoinMeeting } from "./components/meet/JoinMeeting";
-import { VideoRoom } from "./components/meet/VideoRoom";
+import TranslateToggle from "./components/Basic/TranslateToggle"
 
 function App() {
   const dispatch = useDispatch();
@@ -56,6 +53,7 @@ function App() {
     <ThemeProvider>
       <BrowserRouter>
         <Navbar />
+        <TranslateToggle />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/Landing" element={<Landing />} />
@@ -74,12 +72,12 @@ function App() {
           <Route path="/expert/:id" element={<ExpertProfile />} />
           <Route path="/message/:id" element={<MessageContainer />} />
           <Route path="/not-found" element={<PageNotFound />} />
-          <Route path="/chats" element={<Chats/>}/>
-          <Route path="/room" element={<Room/>} />
+          
+          
           {/* <Route path="/videoroom" element={<VideoRoom />} /> */}
-          <Route path="/create" element={<CreateMeeting/>} />
-          <Route path="/join" element= {<JoinMeeting />} />
-          <Route path="/room/:roomId" element={<VideoRoom/> } />
+          
+          
+          
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
