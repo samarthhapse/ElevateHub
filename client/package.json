@@ -23,7 +23,6 @@
     "multiscroll.js": "^0.2.3",
     "react": "^18.3.1",
     "react-dom": "^18.2.0",
-    "react-google-login": "^5.2.2",
     "react-icons": "^5.2.1",
     "react-number-format": "^5.4.0",
     "react-prop-types": "^0.4.0",
