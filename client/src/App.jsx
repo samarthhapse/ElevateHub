@@ -72,7 +72,8 @@ function App() {
           <Route path="/expert/:id" element={<ExpertProfile />} />
           <Route path="/message/:id" element={<MessageContainer />} />
           <Route path="/not-found" element={<PageNotFound />} />
-          
+          <Route path="/chats" element={<Chats />} />
+
           
           {/* <Route path="/videoroom" element={<VideoRoom />} /> */}
           
