@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+html, body {
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none; 
+}
+
 @layer utilities {
 .bg-custom-gradient {
   background-image: linear-gradient(to right, #0d0e24, #0f2526, #0d1117);

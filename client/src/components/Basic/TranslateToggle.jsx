@@ -25,14 +25,14 @@ const TranslateToggle = () => {
 
   return (
     <div>
-      <button onClick={toggleTranslate} style={{ position: 'fixed', top: '20px', left: '20px', zIndex: 1001 }}>
+      <button onClick={toggleTranslate} style={{ position: 'fixed', top: '15px', right: '20px', zIndex: 1001 }}>
         <img src={translateIcon} alt="Translate" style={{ width: '32px', height: '32px' }} />
       </button>
       {showTranslate && (
         <div id="translate-container" style={{
           position: 'fixed',
-          top: '80px',
-          left: '20px',
+          top: '50px',
+          right: '10px',
           background: '#fff',
           padding: '10px',
           border: '1px solid #ddd',

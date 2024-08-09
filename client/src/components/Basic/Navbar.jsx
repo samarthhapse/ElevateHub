@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
+import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa"; 
 import { useTheme } from "../providers/ThemeProvider";
 import Logo from "./Logo";
-import {useSelector} from "react-redux"
-import { MdMessage } from "react-icons/md";
 
 const Navbar = () => {
   const { isDarkMode, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     const d = document.body;
@@ -24,6 +23,24 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
 
   return (
     <div className="max-w-full overflow-x-hidden bg-white dark:bg-gray-900 shadow-md">
@@ -41,6 +58,7 @@ const Navbar = () => {
           </button>
         </div>
         <div
+          ref={menuRef}
           className={`${
             isMenuOpen ? "flex" : "hidden"
           } md:flex md:items-center md:space-x-8 absolute md:static top-16 left-0 w-full md:w-auto bg-white dark:bg-gray-900 flex-col md:flex-row items-center space-y-4 md:space-y-0 p-4 md:p-0 shadow-md md:shadow-none z-50`}
@@ -86,10 +104,10 @@ const Navbar = () => {
             </button>
           </Link>
           <button
-            className="toggle bg-black dark:bg-gray-800 text-white w-24 md:w-32 h-8 rounded-2xl hover:bg-gray-700 dark:hover:bg-gray-600 transition duration-300"
+            className="flex items-center justify-center w-10 h-10 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-full transition duration-300"
             onClick={toggleTheme}
           >
-            {isDarkMode ? "Light" : "Dark"}
+            {isDarkMode ? <FaSun /> : <FaMoon />}
           </button>
         </div>
       </div>
@@ -98,6 +116,8 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
 
 
 
