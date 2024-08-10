@@ -1,60 +1,86 @@
-import dotenv from 'dotenv';
-import nodemailer from 'nodemailer';
+import dotenv from "dotenv";
+import nodemailer from "nodemailer";
+import { v4 as uuidv4 } from 'uuid';
+import User from "../models/user-model.js";
+import ConfirmationCode from "../models/confirmationCode-model.js";
 dotenv.config();
 
 // Configure the transporter with Ethereal Email credentials
 
 const transporter = nodemailer.createTransport({
-    host: process.env.MAIL_HOST,
+  service: "gmail",
+    host:process.env.MAIL_HOST,
     port: process.env.MAIL_PORT,
     auth: {
-        user: process.env.MAIL_AUTH_USER,        // replace with your Ethereal email
-        pass: process.env.MAIL_AUTH_PASSWORD     // replace with your Ethereal email password
+        user:process.env.MAIL_OWNER_FOR_AUTH,
+        pass:process.env.MAIL_AUTH_PASSWORD
     }
 });
+export const authorizeExpert = async (req, res) => {
+  const { email, name} = req.body;
 
-const sendAuthorizationEmail = async (expert) => {
-    const mailOptions = {
-        from: process.env.MAIL_AUTH_USER,      // replace with your Ethereal email
-        to: 'samarthmanojhapse96.0@gmail.com',     // replace with owner's email
-        subject: 'New Expert Registration Authorization',
+  const user = new User({ email: email, name: name });
+  await user.save();
 
-        // text: `A new expert has registered with the following details:\n\n
-        //        Name: ${expert.name}\n
-        //        Email: ${expert.email}\n
-        //        Phone No: ${expert.phoneNo}\n
-        //        Expertise: ${expert.expertise}\n
-        //        Field: ${expert.field}\n
-        //        Job Title: ${expert.jobTitle}\n\n
-        //        Please authorize this registration by clicking the following link:\n
-        //       ${process.env.SERVER_ADDRESS}/api/v1/expert/authorize?email=${expert.email}`
-
-        //OR
-
-        html: `
-            <p>A new expert has registered with the following details:</p>
+  const info = await transporter.sendMail({
+    from: `"${name}" <${email}>`,
+    to:`${process.env.MAIL_OWNER_FOR_AUTH}`,
+    subject: "User Registration Request",
+    text: `Hello, I would like to register on Sarthi. My email is ${email}.`,
+    html: `<p>A new user has registered with the following details:</p>
             <ul>
-                <li><strong>Name:</strong> ${expert.name}</li>
-                <li><strong>Email:</strong> ${expert.email}</li>
-                <li><strong>Phone No:</strong> ${expert.phoneNo}</li>
-                <li><strong>Expertise:</strong> ${expert.expertise}</li>
-                <li><strong>Field:</strong> ${expert.field}</li>
-                <li><strong>Job Title:</strong> ${expert.jobTitle}</li>
+                <li><strong>Name:</strong> ${name}</li>
+                <li><strong>Email:</strong> ${email}</li>
             </ul>
-            <p>Please authorize this registration by clicking the following link:</p>
-            <a href="${process.env.SERVER_ADDRESS}/authorize?email=${expert.email}" target="_blank">
-                Click on this link to authorize. 
-            </a>`
-    };
+            <p>Please authorize this registration by clicking the following link:</p>`,//send the url for sharing the confirmation code where the owner has
+            //to give the email of the user and the code will generated auto,atically and will be sent to the experts email.
+  });
 
-    try {
-        const info = await transporter.sendMail(mailOptions);
-        console.log('Authorization email sent: %s', info.messageId);
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-    } catch (error) {
-        console.error('Error sending email:', error);
-        throw new Error('Failed to send authorization email');
-    }
+  console.log("Message sent: %s", info.messageId);
+  res.json({ message: "Registration request sent to app owner" });
 };
 
-export default sendAuthorizationEmail;
+export const sendConfirmationCode = async (req,res) => {
+    const confirmationCode = uuidv4();// new Id generated
+    if(!confirmationCode){throw new Error("code not generated")}
+    console.log(confirmationCode," : confirmation code") ;
+   
+    const {email,name} = req.body; // assuming this is the user's email provided in the request body
+    console.log(name)
+
+    await ConfirmationCode.create({ email: email, code: confirmationCode });
+
+    const info = await transporter.sendMail({
+        from:`APP_OWNER<${process.env.MAIL_OWNER_FOR_AUTH}>` ,
+        to: email,
+        subject: "Registration Confirmation",
+        text: `Hello, Please confirm your registration by entering the following code: ${confirmationCode}`,
+    });
+
+    console.log("Confirmation email sent: %s", info.messageId);
+    res.json({ message: 'Confirmation code sent to user' });
+};
+export const confirmExpert = async (req, res) => {
+    const { email, confirmationCode } = req.body;
+
+    const codeEntry = await ConfirmationCode.findOne({ email: email, code: confirmationCode });
+
+    if (codeEntry) {
+      const info = await transporter.sendMail({
+        from:`APP_OWNER<${process.env.MAIL_OWNER_FOR_AUTH}>`,
+        to: email,
+        subject: "Request Accepted",
+        text: `Hello, Your registration request was accepted`,
+    });
+    console.log("email sent successfully",info.messageId) ;
+    res.json({ message: 'User confirmed successfully' });
+    // Optionally, you can delete the code entry from the database
+    await ConfirmationCode.deleteOne({ _id: codeEntry._id });
+     //redirect the user to the registration page ...
+        res.json({ message: 'User confirmed successfully' });
+        // Optionally, you can delete the code entry from the database
+        await ConfirmationCode.deleteOne({ _id: codeEntry._id }); //redirect the user to the registration page ..
+    } else {
+        res.status(400).json({ message: 'Invalid confirmation code' });
+    }
+};

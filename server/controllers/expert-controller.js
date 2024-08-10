@@ -1,16 +1,13 @@
 import { Expert } from "../models/expert-model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import sendAuthorizationEmail from "./auth-expert.js"
 import { Student } from "../models/student-model.js";
 import OTP from "../models/otp-model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 const express = import('express');
 const app = (await express).default();
 
-//Expert SignUP Endpoint
 
-const pendingExperts = {};
 
 export const register = async (req, res) => {
   try {
@@ -82,27 +79,27 @@ export const register = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newExpert = new Expert({
-      name,
-      email,
-      phoneNo,
-      password: hashedPassword,
-      expertise,
-      field,
-      jobTitle,
-      avatar: avatar.url,
-    });
+    // const newExpert = new Expert({
+    //   name,
+    //   email,
+    //   phoneNo,
+    //   password: hashedPassword,
+    //   expertise,
+    //   field,
+    //   jobTitle,
+    //   avatar: avatar.url,
+    // });
 
-    // Save the new expert to pending storage
-    pendingExperts[email] = newExpert;
+    // // Save the new expert to pending storage
+    // pendingExperts[email] = newExpert;
 
-    // Send authorization email
-    await sendAuthorizationEmail(newExpert);
+    // // Send authorization email
+    // await sendAuthorizationEmail(newExpert);
 
-    return res.status(200).json({
-      message: "Registration request sent. Awaiting authorization.",
-      success: true,
-    });
+    // return res.status(200).json({
+    //   message: "Registration request sent. Awaiting authorization.",
+    //   success: true,
+    // });
   } catch (err) {
     console.log("Error while registering:", err);
     return res.status(500).json({
@@ -113,25 +110,24 @@ export const register = async (req, res) => {
   }
 };
 
-
 //Authorization From Owner Endpoint
 
 // Authorize the expert
-export const authorizeExpert = async (req, res) => {
-  const { email } = req.query;
+// export const authorizeExpert = async (req, res) => {
+//   const { email } = req.query;
 
-  if (pendingExperts[email]) {
-    try {
-      await pendingExperts[email].save();
-      delete pendingExperts[email];
-      res.status(200).json({ message: "Expert authorized and saved to the database." });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  } else {
-    res.status(400).json({ message: "No pending expert found with this email." });
-  }
-};
+//   if (pendingExperts[email]) {
+//     try {
+//       await pendingExperts[email].save();
+//       delete pendingExperts[email];
+//       res.status(200).json({ message: "Expert authorized and saved to the database." });
+//     } catch (error) {
+//       res.status(500).json({ message: error.message });
+//     }
+//   } else {
+//     res.status(400).json({ message: "No pending expert found with this email." });
+//   }
+// };
 
 
 

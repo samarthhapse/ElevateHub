@@ -6,4 +6,5 @@ const router = express.Router();
 
 router.get("/", isAuthenticated, getChats);
 
+
 export default router;
