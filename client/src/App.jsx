@@ -29,7 +29,6 @@ function App() {
       dispatch(setStudentData(userData));
     }
   }, [dispatch]);
-  // const { theme } = useContext(ThemeContext);
 
   return (
     <ThemeProvider>
