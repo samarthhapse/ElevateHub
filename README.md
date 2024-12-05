@@ -1,8 +1,8 @@
-<h1 align="center"> Sarthi - Your Pathway to Expert Assistance </h1>
+<h1 align="center"> ElevateHub - Your Pathway to Expert Assistance </h1>
 
 <div align="center">
 
-<i>Sarthi is an innovative online platform designed to bridge the gap between junior novices and seasoned experts across various industries. Whether you're a student looking for guidance, a budding professional seeking career advice, or an individual encountering technical hurdles, Sarthi is here to connect you with experienced mentors from around the globe.</i>
+<i>ElevateHub is an innovative online platform designed to bridge the gap between junior novices and seasoned experts across various industries. Whether you're a student looking for guidance, a budding professional seeking career advice, or an individual encountering technical hurdles, ElevateHub is here to connect you with experienced mentors from around the globe.</i>
 
 </div>
 
@@ -17,13 +17,13 @@
 <h2 align="center"> -> Key Features <- </h2>
 
 - **Bug Solving**
-   Encountered a stubborn bug in your code that's impeding your progress? Fear not! With Sarthi, you can seek assistance from experienced developers who can help you troubleshoot and debug your code efficiently.
+   Encountered a stubborn bug in your code that's impeding your progress? Fear not! With ElevateHub, you can seek assistance from experienced developers who can help you troubleshoot and debug your code efficiently.
 
 - **Tech Career Assistance**
-   Navigating the complex landscape of a tech career can be daunting, especially for beginners. Sarthi provides a platform where you can seek guidance on career paths, skill development, job opportunities, and industry insights from seasoned professionals.
+   Navigating the complex landscape of a tech career can be daunting, especially for beginners. ElevateHub provides a platform where you can seek guidance on career paths, skill development, job opportunities, and industry insights from seasoned professionals.
 
 - **Academic Support**
-   Struggling with a challenging academic concept or assignment? Sarthi offers a supportive environment where you can connect with knowledgeable individuals who can provide clarity, guidance, and assistance with your academic endeavors.
+   Struggling with a challenging academic concept or assignment? ElevateHub offers a supportive environment where you can connect with knowledgeable individuals who can provide clarity, guidance, and assistance with your academic endeavors.
 
 ## Step-by-step building guide:
 
@@ -131,21 +131,21 @@ A brief description of what this project does and who it's for
 1 . Clone the repository :
 
 ```
-git clone https://github.com/samarthhapse/sarthi 
+git clone https://github.com/samarthhapse/ElevateHub 
 ```
 
 2 . Navigate to the project directory :
 ```
-cd sarthi 
+cd ElevateHub 
 ```
 
 3 . Add git remote upstream throught the terminal navigating to the profile file: 
 ```
-git remote add upstream https://github.com/samarthhapse/sarthi 
+git remote add upstream https://github.com/samarthhapse/ElevateHub 
 ```
 
 
-#### To get started with Sarthi frontend, follow these steps:
+#### To get started with ElevateHub frontend, follow these steps:
 
 1 . Start frontend :
 ```
@@ -175,9 +175,9 @@ PORT=<PORT-AT-WHICH-YOUR-BACKEND-IS-RUNNING>
 npm run dev
 ```
 
-#### To get started with Sarthi Backend, follow these steps:
+#### To get started with ElevateHub Backend, follow these steps:
 
-1 . Direct to the sarthi project directory -> then to the server directory by using :
+1 . Direct to the ElevateHub project directory -> then to the server directory by using :
 ```
 cd server
 ```
@@ -226,7 +226,7 @@ This will launch the application frontend in your default web browser.
 <div align = "center">
  <h3>Thank you for contributing to our repository</h3>
 
-![Contributors](https://contrib.rocks/image?repo=samarthhapse/sarthi)
+![Contributors](https://contrib.rocks/image?repo=samarthhapse/ElevateHub)
 
 ### Show some ❤️ by starring this awesome repository!
 
